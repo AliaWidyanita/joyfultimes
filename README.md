@@ -6,7 +6,7 @@ Berikut tautan aplikasi di Heroku:<br>
 
 ## Anggota Kelompok:
 1. Reyhan Vivaldi Adrian - 2106750811
-2.
+2. Naznien Fevrianne Malano - 2106751404
 3.
 4.
 5.
