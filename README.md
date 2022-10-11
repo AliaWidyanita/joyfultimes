@@ -8,7 +8,7 @@ Berikut tautan aplikasi di Heroku:<br>
 1. Reyhan Vivaldi Adrian - 2106750811
 2. Naznien Fevrianne Malano - 2106751404
 3. Prita Elisabeth Laura Tarigan - 2106751190
-4.
+4. Alia Widyanita Puspaningrum - 2106751625
 5.
 
 
