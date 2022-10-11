@@ -7,7 +7,7 @@ Berikut tautan aplikasi di Heroku:<br>
 ## Anggota Kelompok:
 1. Reyhan Vivaldi Adrian - 2106750811
 2. Naznien Fevrianne Malano - 2106751404
-3.
+3. Prita Elisabeth Laura Tarigan - 2106751190
 4.
 5.
 
