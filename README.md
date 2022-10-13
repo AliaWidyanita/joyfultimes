@@ -1,5 +1,5 @@
 # Kelompok B05 - JoyfulTimes 🏥
-You don't have to struggle in silence, not everything that weighs you down is yours to carry ❤️
+You don't have to struggle in silence, don't carry everything alone ❤️
 
 
 ## 🔗 Link Website
