@@ -1,4 +1,4 @@
-# PBP Pachill - Kelompok B05 - JoyfulTimes 🏥
+# Kelompok B05 - JoyfulTimes 🏥
 Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
 
 
