@@ -9,7 +9,7 @@ Berikut tautan aplikasi di Heroku:<br>
 2. Naznien Fevrianne Malano - 2106751404
 3. Prita Elisabeth Laura Tarigan - 2106751190
 4. Alia Widyanita Puspaningrum - 2106751625
-5.
+5. Muhammad Alif Ismady - 2106654492
 
 
 ## Cerita aplikasi
