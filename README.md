@@ -1,5 +1,5 @@
 # Kelompok B05 - JoyfulTimes 🏥
-Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
+You don't have to struggle in silence, not everything that weighs you down is yours to carry ❤️
 
 
 ## 🔗 Link Website
