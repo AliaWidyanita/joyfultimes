@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5" id="content">
+    <h1 id="title"></h1>
+    <h6 class="opacity-50" id="date"></h6>
+    <hr>
+    <p id="body"></p>
+</div>
+
+<script>
+    const obj = JSON.parse("{{ item|escapejs }}");
+    console.log(obj)
+    document.getElementById("title").innerHTML = obj[0].fields.title;
+    document.getElementById("date").innerHTML = obj[0].fields.date;
+    document.getElementById("body").innerHTML = obj[0].fields.body;
+</script>
+
+{% endblock content %}
