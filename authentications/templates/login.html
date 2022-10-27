@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+{% block content %}
+<div class = "login">
+    <br>
+    <br>
+
+    <h1>Welcome back!</h1>
+    <h5>Please login to continue.</h5>
+    <div class = "containerform">
+    <div class = "formbox">
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                <br>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login" style="background-color:#2954E1; color:white"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    </div>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+    <br>
+    Don't have an account yet? <a href="{% url 'authentications:register' %}">Create Account</a>
+    
+</div>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" style="padding:0px 20px">JoyfulTimes</a>
+    <a class="btn btn-primary" href="{% url 'forum:Forum' %}" role="button" style=" text-align:right">Forum</a>
+    <a class="btn btn-primary" role="button" style="text-align:right">Notes</a>
+    <a class="btn btn-primary" role="button" style="text-align:right">Tips & Tricks</a>
+      {% if user.is_authenticated %}
+      <a class="btn btn-primary" role="button" style="text-align:right">Mood Tracker</a>
+      <a class="btn btn-primary" role="button" style="text-align:right">Mental Health Assesment</a>
+      <a class="btn btn-primary" role="button" style="text-align:right">Diary</a>
+      <a class="btn btn-primary" href="{% url 'authentications:logout' %}" role="button" style="margin:0px 20px">Logout</a>
+      {% else %}
+      <a class="btn btn-primary" href="{% url 'authentications:login' %}" role="button" style="margin:0px 20px">Log In</a>
+      {% endif %}
+    
+  </nav>
+  
