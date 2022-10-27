@@ -21,6 +21,18 @@ def show_diary(request):
     }
     return render(request, 'diary_home.html', context)
 
+def show_detail(request, id):
+    the_item = Diary.objects.filter(user = request.user, id=id)
+    context = {"item": serializers.serialize("json", the_item)}
+    return render(request, 'detail.html', context)
+
+
+
+@login_required(login_url='authentications/login/')
+def json_detail(request, id):
+    item = Diary.objects.filter(user = request.user, pk=id)
+    return HttpResponse(serializers.serialize("json", item))
+
 @login_required(login_url='authentications/login/')
 def page_add(request):
     form = AddDiaryForm()
@@ -34,17 +46,13 @@ def page_add(request):
             return redirect('diary:show_diary')
     return render(request, 'create.html', context)
 
-def get(request):
-    form = AddDiaryForm()
-    context = {'form': form}
-    if request.GET:
-        title = request.GET["title"]
-        description = request.GET["description"]
-    return render(request, "diary_home.html", context)
-
-def json_detail(request, id):
-    data = Diary.objects.filter(user = request.user, pk=id)
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+# def get(request):
+#     form = AddDiaryForm()
+#     context = {'form': form}
+#     if request.GET:
+#         title = request.GET["title"]
+#         description = request.GET["description"]
+#     return render(request, "diary_home.html", context)
 
 def json_diary(request):
     diary = Diary.objects.filter(user = request.user)
@@ -61,3 +69,4 @@ def add_diary(request):
             return HttpResponse(diary, status=201)
 
         return HttpResponseBadRequest("Hmm.. What's wrong?")
+        

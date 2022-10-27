@@ -6,14 +6,8 @@
 <body>
   <div class="container" id="content-section"></div>
     
-
-    
-
-
-    
-  
-    <!-- Modal -->
-    <div class="modal-dialog">
+  <!-- Modal -->
+  <div class="modal-dialog">
     <div class="modal fade" id="add-diary-modal" tabindex="-1" aria-labelledby="add-diary-modal-label" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content" style="padding: 10px">
@@ -27,7 +21,7 @@
               {% csrf_token %}
               <div class="form-outline mb-4">
                 <input type="text" id="title" name="title" class="form-control mb-4" placeholder="Hari ini aku bahagia" />
-                <textarea class="form-control mb-4" id="description" name="description" rows="4" placeholder="Ungkapkan ceritamu di sini"></textarea>
+                <textarea class="form-control mb-4" id="body" name="body" rows="4" placeholder="Ungkapkan ceritamu di sini"></textarea>
               </div>
               <button type="submit" class="btn btn-primary" id="submit-diary-btn">Add diary</button>
             </form>
@@ -36,7 +30,7 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
   
 </body>
 
@@ -44,9 +38,11 @@
 
 <script>
   function createCard(item) {
-    const area = document.getElementById("diary-area")
+    const area = document.getElementById("diary-area");
     area.insertAdjacentHTML('beforeend', '<div class="card w-100" style="margin-top: 10px"><div class="card-body"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div>')
   }
+  
+
   
   function getDiary() {
     $.ajax({
@@ -71,7 +67,7 @@
   $(document).ready(() => {
     getDiary();
 
-    $('#add-diary-form').submit((e) => {
+    $('#add-diary-form').submit(function(e){
       e.preventDefault();
       $.ajax({
         url: "{% url 'diary:add_diary' %}",
@@ -81,7 +77,7 @@
         success: (item) => {
           $('#add-diary-form').trigger('reset');
           $('#add-diary-modal').modal('hide');
-
+          console.log(item);
           getDiary();
         }
       })

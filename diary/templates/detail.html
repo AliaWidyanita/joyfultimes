@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" id="content">
+    
+</div>
+
+<script>
+    const obj = JSON.parse("{{ item|escapejs }}");
+    console.log(obj)
+    document.getElementById("content").insertAdjacentHTML('afterbegin', " " + obj[0].fields.title + " ")
+</script>
+
+{% endblock content %}
