@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<body>
+  <div class="container" id="content-section"></div>
+    
+
+    
+
+
+    
+  
+    <!-- Modal -->
+    <div class="modal-dialog">
+    <div class="modal fade" id="add-diary-modal" tabindex="-1" aria-labelledby="add-diary-modal-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="add-diary-modal-label">Add new diary</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <div class="modal-body">
+            <form id="add-diary-form" method="POST">
+              {% csrf_token %}
+              <div class="form-outline mb-4">
+                <input type="text" id="title" name="title" class="form-control mb-4" placeholder="Hari ini aku bahagia" />
+                <textarea class="form-control mb-4" id="description" name="description" rows="4" placeholder="Ungkapkan ceritamu di sini"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submit-diary-btn">Add diary</button>
+            </form>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    </div>
+  
+</body>
+
+
+
+<script>
+  function createCard(item) {
+    const area = document.getElementById("diary-area")
+    area.insertAdjacentHTML('beforeend', '<div class="card w-100" style="margin-top: 10px"><div class="card-body"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div>')
+  }
+  
+  function getDiary() {
+    $.ajax({
+      url: "{% url 'diary:json_diary' %}",
+      type: "GET",
+      dataType: "json",
+      success: (items) => {
+        const area = document.getElementById("content-section")
+        if (items.length == 0) {
+          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 40px;'>Ouch, {{nama_user}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><a class='btn btn-primary' id='add-button' data-bs-toggle='modal' data-bs-target='#add-task-modal'>Add new diary</a></div>")
+        } else {
+          $("#nodiary").remove();
+          $("#ar").remove()
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new task </button></div></div>")
+          items.map(item => createCard(item));
+          console.log(items);
+        }
+      }
+    })
+  }
+
+  $(document).ready(() => {
+    getDiary();
+
+    $('#add-diary-form').submit((e) => {
+      e.preventDefault();
+      $.ajax({
+        url: "{% url 'diary:add_diary' %}",
+        method: "POST",
+        headers: {"X-CSRFToken": window.CSRF_TOKEN},
+        data: $('#add-diary-form').serialize(),
+        success: (item) => {
+          $('#add-diary-form').trigger('reset');
+          $('#add-diary-modal').modal('hide');
+
+          getDiary();
+        }
+      })
+    })
+  })
+</script>
+
+
+{% endblock content %}
