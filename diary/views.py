@@ -9,11 +9,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import datetime
-from django.urls import reverse_lazy
-from django.views.generic import (
-    UpdateView,
-    DeleteView,
-)
 
 # Create your views here
 @login_required(login_url='/authentications/login')
@@ -72,6 +67,11 @@ def updaterecord(request, id):
         item.title = title
         item.body = body
         item.save()
-        return redirect('diary:show_diary')
-    print('GAGAL')
+        return redirect('diary:show_detail', id=item.id)
+    return HttpResponseBadRequest("Hmm.. What's wrong?")
+
+def delete(request, id):
+    item = Diary.objects.get(user = request.user, id = id)
+    item.delete()
+    return redirect('diary:show_diary')
     

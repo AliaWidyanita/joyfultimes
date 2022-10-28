@@ -1,5 +1,5 @@
 from django.urls import path
-from diary.views import show_diary, json_diary, add_diary, page_add, show_detail, update, updaterecord
+from diary.views import show_diary, json_diary, add_diary, page_add, show_detail, update, updaterecord, delete
 
 app_name = 'diary'
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('<int:id>/', show_detail, name='show_detail'),
     path('update/<int:id>', update, name='update'),
     path('update/updaterecord/<int:id>', updaterecord, name='updaterecord'),
+    path('delete/<int:id>', delete, name='delete'),
 ]
