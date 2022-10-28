@@ -65,7 +65,7 @@
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
-          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new task </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new diary </button></div></div>")
           items.map(item => createCard(item));
           console.log(items);
         }
