@@ -22,7 +22,7 @@ def show_diary(request):
 
 def show_detail(request, id):
     the_item = Diary.objects.filter(user = request.user, id=id)
-    context = {"item": serializers.serialize("json", the_item)}
+    context = {"id": the_item[0].id, "item": serializers.serialize("json", the_item)}
     return render(request, 'detail.html', context)
 
 @login_required(login_url='authentications/login/')

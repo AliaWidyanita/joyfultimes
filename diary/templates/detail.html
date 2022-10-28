@@ -10,6 +10,8 @@
     <p id="body"  style="width: 100%"></p>
 </div>
 
+<a href="delete/{{id}}" style="cursor: pointer;"><i class="fa-solid fa-trash" style="color:red"></i></a>
+
 <script>
     const obj = JSON.parse("{{ item|escapejs }}");
     console.log(obj)
