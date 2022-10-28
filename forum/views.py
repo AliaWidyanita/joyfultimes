@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from requests import Response
 from forum.models import ForumPost
 from .forms import *
@@ -13,15 +13,16 @@ import datetime
 @csrf_exempt
 def get_forum_list(request):
     list_post = ForumPost.objects.all().order_by('-date_created')
-
-    ret = []
+    user = request.user.username
+    ret = [user]
     for posts in list_post:
         temp = {
             "pk": posts.pk,
-            "author": posts.author,
+            "author": posts.author.username,
             "topic": posts.topic,
             "description":posts.description,
             "date_created":posts.date_created.date(),
+            "role":posts.role
         }
         ret.append(temp)
 
@@ -31,14 +32,17 @@ def get_forum_list(request):
 @csrf_exempt
 def get_comment_list(request, id):
     forumPost = ForumPost.objects.get(pk=id)
-    comments = Comment.objects.all().filter(parentForum=forumPost)
-    ret = []
+    comments = Comment.objects.all().filter(parentForum=forumPost).order_by('-date_created')
+    user = request.user.username
+    ret = [user]
     for comment in comments:
         temp = {
             "pk": comment.pk,
             "author": comment.author,
             "parentForum": comment.parentForum,
-            "description": comment.description
+            "description": comment.description,
+            "role": comment.role,
+            "date_created": comment.date_created.date(),
         }
         ret.append(temp)
     data = json.dumps(ret, default=str)
@@ -50,19 +54,22 @@ def create_post_ajax(request):
     if request.method == "POST":
         topic = request.POST.get("topic")
         description = request.POST.get("description")
+        role=request.POST.get("role")
 
         new_forum = ForumPost.objects.create(
             topic=topic,
             description=description,
             date_created=datetime.date.today(),
             author=request.user,
+            role=role
         )
         result = {
             'pk':new_forum.pk,
             'author':new_forum.author.username,
             'topic':new_forum.topic,
             'description':new_forum.description,
-            'date_created':new_forum.date_created    
+            'date_created':new_forum.date_created.date(),
+            'role':new_forum.role    
         }
         return JsonResponse(result, status=200)
     return render(request, "forumHome.html")
@@ -74,18 +81,20 @@ def create_comment_ajax(request, id):
     forumPost = ForumPost.objects.get(pk=id)
     if request.method == "POST":
         description = request.POST.get("description")
-
+        role = request.POST.get('role')
         new_comment = Comment.objects.create(
             parentForum=forumPost,
             description=description,
             date_created=datetime.date.today(),
             author=request.user,
+            role=role
         )
         result = {
             'pk':new_comment.pk,
             'author':new_comment.author.username,
             'description':new_comment.description,
-            'date_created':new_comment.date_created    
+            'date_created':new_comment.date_created.date(),
+            'role':new_comment.role  
         }
         return JsonResponse(result, status=200)
     return render(request, "forumHome.html")
@@ -95,55 +104,27 @@ def index(request):
     response = {'forumPost': forumPost}
     return render(request, 'forumHome.html', response)
 
-@login_required(login_url='/authentications/login')
-@csrf_exempt
-def post_to_forum(request):
-    form = ForumForm(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.author = request.user
-            instance.save()
-            return redirect('/forum/')
-    
-    context = dict()
-    context["form"] = form
-    return render(request, "postToForum.html", context)
-
 # TODO: Implement function that will view individual post
 def forum_post_detail(request, id):
 
     forumPost = ForumPost.objects.get(pk=id)
-    comments = Comment.objects.all().filter(parentForum=forumPost)
-    if (len(comments) == 0):
-        dummy = Comment()
-        dummy.description = "Belum ada komentar"
-        # dummy.author = ""
-        comments = [dummy]
-    if request.method == 'POST' and request.is_ajax():
-        description = request.POST.get('description')
+   
+    return render(request, 'forumDetail.html', {'forumPost':forumPost})
 
-        response_data = {'description':description, 'author': request.user.get_username()}
 
-        tmp = Comment(author=request.user,description=description, parentForum=forumPost)
-        tmp.save()
 
-        return JsonResponse(response_data)
-    return render(request, 'forumDetail.html', {'forumPost':forumPost, 'comments':comments})
+@login_required(login_url='/authentications/login')
+@csrf_exempt
+def delete_forum(request, id):
+    if request.method == "DELETE":
+        forum = get_object_or_404(ForumPost, id=id)
+        forum.delete()
+    return HttpResponse(status=202)
 
-@login_required(login_url ='/authentications/login/')
-def post_comment(request, id):
-    form = CommentForm(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.author = request.user
-            instance.parentForum = ForumPost.objects.get(id=id)
-            instance.save()
-            return redirect('/forum/' + id)
-    
-    context = dict()
-    context["form"] = form
-    return render(request, "postComment.html", context)
+@login_required(login_url='/authentications/login')
+@csrf_exempt
+def delete_comment(request, id):
+    if request.method == "DELETE":
+        comment = get_object_or_404(Comment, id=id)
+        comment.delete()
+    return HttpResponse(status=202)
