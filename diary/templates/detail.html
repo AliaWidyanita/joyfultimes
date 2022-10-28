@@ -21,7 +21,7 @@
     const obj = JSON.parse("{{ item|escapejs }}");
     var date = "{{ date|date:'D, d M Y H:i' }}"
     document.getElementById("title").innerHTML = obj[0].fields.title;
-    document.getElementById("date").innerHTML = date;
+    document.getElementById("date").innerHTML = "Last modified at " + date;
 
     var rawText = obj[0].fields.body;
     var arr = rawText.split("\n");
