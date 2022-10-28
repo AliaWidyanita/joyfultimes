@@ -10,7 +10,7 @@ urlpatterns = [
     path('create/', page_add, name='page_add'),
     path('<int:id>/', show_detail, name='show_detail'),
     path('edit/<int:id>', update, name='edit'),
-    path('update/updaterecord/<int:id>', updaterecord, name='updaterecord'),
+    path('edit/updaterecord/<int:id>', updaterecord, name='updaterecord'),
     path('delete/<int:id>', delete, name='delete'),
 
 ]

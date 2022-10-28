@@ -7,12 +7,14 @@
     <h1 id="title"></h1>
     <h6 class="opacity-50" id="date"></h6>
     <hr>
-    <p id="body"  style="width: 100%"></p>
+    <p id="body" style="width: 100%"></p>
+
+    <a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><button type="button" class="btn btn-secondary">Edit</button></a>
+    <a href="{% url 'diary:delete' id %}" style="cursor: pointer; margin-left: 3px;"><button type="button" class="btn btn-danger">Delete</button></a>
+    
 </div>
 
-<a href="{% url 'diary:delete' id %}" style="cursor: pointer;"><i class="fa-solid fa-trash" style="color:red"></i></a>
 
-<a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><i class="fa-solid fa-pen-to-square"></i></a>
 
 
 <script>
