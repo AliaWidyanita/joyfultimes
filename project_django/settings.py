@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'forum',
     'diary',
     'cal',
+    'assessment',
 ]
 
 MIDDLEWARE = [

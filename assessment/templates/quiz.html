@@ -1,0 +1,89 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block meta %}
+<title>{{ name }} | JoyFulTimes</title>
+{% endblock %} 
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'quiz.css' %}">
+<script src="{% static 'quiz.js' %}"></script>
+
+<!-- Header -->
+<header class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                <h1>{{ name }}</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end of header -->
+
+<!-- Last Result -->
+<div class="ex-basic-1 pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                {% if hasil_assessment %}
+                <div id="past-result" class="card text-center mb-4">
+                    <div class="card-header">
+                        Last {{name}} Result
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hasil_assessment.result }}</h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ hasil_assessment.date }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of last result -->
+
+<!-- Assessment Form -->
+<div class="ex-basic-1 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                <form action="/assessment/{{url}}-assessment-json/" method="POST" id="assessmentform" class="form">
+                    {% csrf_token %}
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 50%">In the last 2 weeks, how often are you bothered by the following problems?</th>
+                                <th style="width: 12.5%" class="text-center">Never</th>
+                                <th style="width: 12.5%" class="text-center">Sometimes</th>
+                                <th style="width: 12.5%" class="text-center">Often</th>
+                                <th style="width: 12.5%" class="text-center">Very Often</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for field in form %}
+                            <tr>
+                                <td><label class="" for="{{ field.auto_id }}">{{ field.label }}</label></th>
+                
+                                {% for choice in field %}
+                                <td class="text-center align-middle">{{ choice }}</th>
+                                {% endfor %}
+                
+                            </tr>
+                            {% endfor %}
+                            <tr class="table-active">
+                                <td>Assessment Result</td>
+                                <td colspan='4' class="text-center font-weight-bold" id='result'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input class="btn btn-block btn-solid-lg" type="submit" value="View results">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of assessment form -->
+{% endblock %}

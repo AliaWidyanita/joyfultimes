@@ -1,0 +1,15 @@
+.main-content {
+  text-align: center;
+}
+
+.content {
+  padding-top: 1em;
+  padding-left: 8em;
+  padding-right: 8em;
+  margin-top: 80px;
+}
+
+.sub-content {
+  display: flex;
+  flex-direction: column;
+}

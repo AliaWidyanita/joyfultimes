@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block meta %}
+<title>Mental Health Assessment | JoyFulTimes</title>
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="content">
+        <!-- Assessment content -->
+        <div class="h1">Assessment List</div>
+        <hr>
+        <div class="sub-content">
+            <div class="wrapper">
+                <a href="{% url 'assessment:depression_assessment' %}">
+                    <button class="modal-button" type="button">Depression Assessment</button>
+                </a>
+            </div>
+            <div class="wrapper">
+                <a href="{% url 'assessment:anxiety_assessment' %}">
+                    <button class="modal-button" type="button">Anxiety Assessment</button>
+                </a>
+            </div>
+            <div class="wrapper">
+                <a href="{% url 'assessment:stress_assessment' %}">
+                    <button class="modal-button" type="button">Stress Assessment</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
