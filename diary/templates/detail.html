@@ -7,15 +7,29 @@
     <h1 id="title"></h1>
     <h6 class="opacity-50" id="date"></h6>
     <hr>
-    <p id="body"></p>
+    <div id="body-div" style="margin-bottom: 50px;"></div>
+
+    <a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><button type="button" class="btn btn-secondary">Edit</button></a>
+    <a href="{% url 'diary:delete' id %}" style="cursor: pointer; margin-left: 3px;"><button type="button" class="btn btn-danger">Delete</button></a>
+    
 </div>
+
+
+
 
 <script>
     const obj = JSON.parse("{{ item|escapejs }}");
-    console.log(obj)
+    var date = "{{ date|date:'D, d M Y H:i' }}"
     document.getElementById("title").innerHTML = obj[0].fields.title;
-    document.getElementById("date").innerHTML = obj[0].fields.date;
-    document.getElementById("body").innerHTML = obj[0].fields.body;
+    document.getElementById("date").innerHTML = date;
+
+    var rawText = obj[0].fields.body;
+    var arr = rawText.split("\n");
+    arr.forEach(element => {
+        if (element != "\r") {
+            document.getElementById("body-div").insertAdjacentHTML("beforeend", "<p>"+ element + "</p>");
+        }
+    });
 </script>
 
 {% endblock content %}

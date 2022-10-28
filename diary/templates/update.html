@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<h1>Edit diary</h1>
+
+
+<form action="updaterecord/{{ id }}" method="post">
+{% csrf_token %}
+Title:<br>
+<input name="title" value="{{ title }}">
+<br><br>
+Body:<br>
+<textarea class="form-control mb-4" name="body" rows="4">{{ body }}</textarea>
+<br><br>
+<input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
