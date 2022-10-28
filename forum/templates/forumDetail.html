@@ -16,7 +16,8 @@
          $(document).ready(function() {
             loadData();
             $('#add-comment').click(function(e) {
-                console.log("haihai")
+                var url = window.location.href.split("/");
+                var id = url[url.length-2]
                 if ($("#description").val() == "") {
                     console.log("kosong Bro")
                     $("#result").val("Topic and description cannot be empty!")
@@ -25,16 +26,17 @@
                     console.log("haihaihai")
                     $.ajax({
                         type:"POST",
-                        url:"/api/addComment/$",
+                        url:"/forum/api/addComment/" + id + '/',
                         data:{
                             description:$("#description").val(), 
+                            role:$("#roles").val(),
                             csrfmiddlewaretoken:'{{ csrf_token }}',
                         },
                         dataType:'json',
                         success: function(data, status) {
-                            console.log("haihaihaihaihai")
+
                             console.log(data.topic)
-                            $(`#todo`).prepend(card(data))
+                            $(`#todo`).prepend(cardUser(data))
                             $('#description').val('')
                         },
                     });
@@ -42,32 +44,79 @@
             });
         
         })
-       
+
+        function deleteCard(id) {
+            $.ajax({
+                url:`/forum/deleteComment/${id}` + `/`,
+                type: 'DELETE',
+                success: function(result) {
+                    $(`#comment-${id}`).remove()
+                }
+            });
+        }
         
         
         const card = (data) =>
-            `<div class="card shadow border-0 bg-light" style="margin:30px 30px">
-                <div class="card-body p-25 style="margin:"20px 20px">
-                    <p class="card-text mb-0">${data.description}</p>
-                </div>
-                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                    <div class="d-flex align-items-end justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
-                            <div class="small">
-                                <div class="fw-bold">${data.author}</div>
-                                <div class="text-muted">${data.date_created}</div>
+            `<div id="comment-${data.pk}">
+                <div class="card shadow border-0 bg-light" style="margin:10px 40px 10px 50px">
+                    <div class="card-body p-25 style="margin:20px 20px">
+        
+                    </div>
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                        <div class="d-flex align-items-end justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." style="width:60px; height:60px">
+                                <div class="small">
+                                    <div style="float: left">
+                                        <div class="fw-bold">${data.author} </div>
+                                        <div class="text-muted">${data.date_created}</div>
+                                    </div>
+                                    <div class="text-muted">${data.role}</div>
+                                
+                                </div>
                             </div>
                         </div>
+                        <p class="card-text mb-0" style="margin:10px 0px; float:left; font-size: 15pt">${data.description}</p>
+                    </div>
+                </div>
+            </div>`
+
+            const cardUser = (data) =>
+            `<div id="comment-${data.pk}">
+                <div class="card shadow border-0 bg-light" style="margin:10px 40px 10px 50px">
+                    <div class="card-body p-25 style="margin:20px 20px">
+                    </div>
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                        <div class="d-flex align-items-end justify-content-between">
+                            <div class="d-flex align-items-center" style="display:inline-block">
+                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." style="width:60px; height:60px">
+                                <div class="small">
+                                    <div style="float: left;">
+                                        <div class="fw-bold">${data.author} </div>
+                                        <div class="text-muted">${data.date_created}</div>
+                                    </div>
+                                    <div class="text-muted">${data.role}</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash"></i></button>
+                        </div>
+                        <p class="card-text mb-0" style="margin:10px 0px; float:left; font-size: 15pt">${data.description}</p>
                     </div>
                 </div>
             </div>`
 
 
         function loadData() {
-            $.get(`/forum/comment/${forumPost.pk}`, function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    $(`#todo`).append(card(data[i]));
+            var url = window.location.href.split("/");
+            var id = url[url.length-2]
+            console.log(id)
+            $.get(`/forum/api/comment/` + id + `/`, function(data) {
+                for (var i = 1; i < data.length; i++) {
+                    if (data[0] == data[i].author) {
+                        $(`#todo`).append(cardUser(data[i]));
+                    } else {
+                        $(`#todo`).append(card(data[i]));
+                    }
                 }
             });
         }
@@ -98,18 +147,17 @@
             <section class="py-5">
                 <div class="container px-5">
                     <div class="row gx-5">
-                            <div class="card-body p-4">
+                            <div class="card-body p-4" style="align-items:center">
                                 <div class="d-flex h-100 align-items-center justify-content-center">
                                     <div class="text-center">
-                                        <a class="text-decoration-none" href="..">
-                                            <h2 class="fw-bolder fs-5 mb-4">JoyfulTime Forum</h2>
-                                            <!-- <i class="bi bi-arrow-right"></i> -->
+                                        <a class="text-decoration-none" href=".">
+                                            <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'">JoyfulTime Forum</h2>
                                         </a>
-                                        <div class="d-flex align-items-center mt-lg-5 mb-4">
+                                        <div class="d-flex align-items-center mt-lg-5 mb-4" style="padding:10pt 0pt 0pt 30pt">
                                             <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
                                             <div class="ms-3">
                                                 <div class="fw-bold">{{forumPost.author}}</div>
-                                                <!-- <div class="text-muted"><a href="..">Forum Home</a></div> -->
+
                                             </div>
                                         </div>
                                     </div>
@@ -120,17 +168,10 @@
                                 <!-- Post header-->
                                 <div class="card h-100 shadow border-0 bg-light" style="text-align:center">
                                     <header class="p-4">
-                                        <!-- Post title-->
                                         <h1 class="fw-bolder mb-1">{{forumPost.topic}}</h1>
-                                        <!-- Post meta content-->
                                         <div class="text-muted fst-italic mb-2">{{forumPost.date_created}}</div>
-                                        <!-- Post categories-->
-                                        <!-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> -->
                                     </header>
-                                    <!-- Preview image figure-->
-                                    <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
-                                    <!-- Post content-->
+                                    
                                     <section class="mb-5">
                                         <p class="fs-5 p-4">{{forumPost.description}}</p>
                                     </section>
@@ -138,19 +179,24 @@
                             </article>
                             <!-- Comments section-->
                             <section>
-                                <div class="card bg-light">
+                                <h2 style="margin:20px 20px">Comments</h2>
                                     {% if user.is_authenticated %}
                                         <!-- new comments -->
                                         <form action="" method="POST" id="post-form"> {% csrf_token %}
                                             <!-- Description input-->
                                             <div class="form-floating mb-3" style="margin:40px 40px">
-                                                <textarea class="form-control" id="desc" name="description" placeholder="Enter your message here..." style="height: 15rem"></textarea>
+                                                <textarea class="form-control" id="description" name="description" placeholder="Enter your message here..." style="height: 6rem; width:70%"></textarea>
                                                 <label for="desc">Comments</label>
                                             </div>
                                             <!-- Submit Button-->
-                                            <button type="button" class="btn btn-primary" id="add-comment" style="margin:20px 20px">Add</button>
-                                           
+                                            <select id="roles" class="form-select form-select-sm" aria-label=".form-select-sm example" style="margin:20px 40px; width:65.5%;">
+                                                <option value="Patient">Patient</option>
+                                                <option value="Clinical">Clinical</option>
+                                                <option value="Experts">Experts</option>
+                                                <option value="Patient's Relative">Patient's Relative</option>
+                                            </select>
                                         </form>
+                                        <button type="button" class="btn btn-primary" id="add-comment" style="margin:10px 40px; width:5%">Add</button>
                                     {% else %}
                                         <div class="d-flex mb-4">
                                             <!-- Parent comment-->
@@ -159,13 +205,13 @@
                                                 <div class="h6 fw-bolder" style="margin:20px 0px">Silahkan <a href="/authentications/login">Login</a> untuk memberikan komentar</div>
                                             </div>
                                         </div>
-                                        
                                     {% endif %}
-                                    <div id="todo">
-                                    </div>
-                                </div>
+                                    
                             </section>
                     </div>
+                
+                </div>
+                <div class="grid gap-4 grid-cols-1 sm:grid-flow-cols-1 md:grid-cols-3 lg:grid-cols-4 m-4" id="todo" style="justify-content: center; align-items: center; padding:0px 40px">
                 </div>
             </section>
         </main>
