@@ -4,8 +4,8 @@
 {% block content %}
 
 <body>
-  <div class="text-center">
-    <a class="text-decoration-none" style="margin: 30px" href=".">
+  <div class="text-center"style="margin-top: 50px;">
+    <a class="text-decoration-none" >
       <h2 class="fw-bolder fs-25 mb-25">My Diary</h2>
     </a>
   </div>
@@ -47,7 +47,7 @@
   function createCard(item) {
     const area = document.getElementById("diary-area");
     area.insertAdjacentHTML('beforeend', 
-    '<div class="card shadow border-0 bg-light" style="margin:30px 30px"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div><a href="delete/' + item.pk + '" style="cursor: pointer;"><button>DELETE</button></a>') 
+    '<div class="card shadow border-0 bg-light" style="margin:30px 30px"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div><a href="delete/' + item.pk + '" style="cursor: pointer;"><button>DELETE</button></a><a href="edit/' + item.pk + '" style="cursor: pointer;"><button>EDIT</button></a>') 
     console.log(item.pk)
   }
   
@@ -61,7 +61,7 @@
       success: (items) => {
         const area = document.getElementById("content-section")
         if (items.length == 0) {
-          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 40px;'>Ouch, {{nama_user}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><a class='btn btn-primary' id='add-button' data-bs-toggle='modal' data-bs-target='#add-task-modal'>Add new diary</a></div>")
+          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new diary </button></div></div>")
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
