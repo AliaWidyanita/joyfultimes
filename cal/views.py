@@ -60,3 +60,11 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('cal:calendar'))
     return render(request, 'cal/event.html', {'form': form})
+
+#def event(request, event_id=None):
+#mood = request.POST.get('mood', False)
+##new = Event(title=title, description=description, start_time=start_time,end_time=end_time)
+#new.save()
+##mood={'event_id':new.event_id, 'title': new.title, 'description':new.description, 'start_time'=new.start_time,'end_time'=new.end_time}
+#data={ 'mood':mood}
+#return JsonResponse(data)
