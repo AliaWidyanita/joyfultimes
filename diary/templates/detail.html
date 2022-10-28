@@ -9,8 +9,13 @@
     <hr>
     <div id="body-div" style="margin-bottom: 50px;"></div>
 
-    <a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><button type="button" class="btn btn-secondary">Edit</button></a>
-    <a href="{% url 'diary:delete' id %}" style="cursor: pointer; margin-left: 3px;"><button type="button" class="btn btn-danger">Delete</button></a>
+    <div style="margin:0px 0px 0px 0px">
+        <a href="{% url 'diary:show_diary'%}" style="cursor: pointer;"><button type="button" class="btn btn-secondary">Back</button></a>
+        <a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><button type="button" class="btn btn-primary" style="margin: 0px 20px 0px 5px;">Edit</button></a>
+        <a href="{% url 'diary:delete' id %}">
+            <i class="fa-solid fa-trash" style="color:#D11A2A"></i>
+        </a>
+    </div>
     
 </div>
 

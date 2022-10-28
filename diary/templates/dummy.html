@@ -1,0 +1,14 @@
+<a href="{% url 'diary:edit' id %}" style="cursor: pointer;"><button type="button" class="btn btn-secondary">Edit</button></a>
+    <a href="{% url 'diary:delete' id %}" style="cursor: pointer; margin-left: 3px;"><button type="button" class="btn btn-danger">Delete</button></a>
+
+
+    <form action="updaterecord/{{ id }}" method="post">
+        {% csrf_token %}
+        Title:<br>
+        <input name="title" value="{{ title }}">
+        <br><br>
+        Body:<br>
+        <textarea class="form-control mb-4" name="body" rows="4">{{ body }}</textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+        </form>

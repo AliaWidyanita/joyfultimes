@@ -3,11 +3,12 @@
 
 {% block content %}
 
-<body>
+<body style="margin-bottom: 100px;">
   <div class="text-center"style="margin-top: 50px;">
     <a class="text-decoration-none" >
-      <h2 class="fw-bolder fs-25 mb-25">My Diary</h2>
+      <h1 class="fw-bolder fs-25 mb-25">Diary</h1>
     </a>
+    <h5>My beautiful stories</h5>
   </div>
   
 
@@ -72,7 +73,7 @@
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
-          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px;'> Add new diary </button></div></div>")
           items.map(item => createCard(item));
           console.log(items);
         }
