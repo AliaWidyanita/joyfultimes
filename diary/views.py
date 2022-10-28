@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-import datetime
+from datetime import datetime
 
 # Create your views here
 @login_required(login_url='/authentications/login')
@@ -22,7 +22,7 @@ def show_diary(request):
 
 def show_detail(request, id):
     the_item = Diary.objects.filter(user = request.user, id=id)
-    context = {"id": the_item[0].id, "item": serializers.serialize("json", the_item)}
+    context = {"id": the_item[0].id, "item": serializers.serialize("json", the_item), "date": the_item[0].date}
     return render(request, 'detail.html', context)
 
 @login_required(login_url='authentications/login/')
@@ -66,6 +66,7 @@ def updaterecord(request, id):
         item = Diary.objects.get(user = request.user, id=id)
         item.title = title
         item.body = body
+        item.date = datetime.now()
         item.save()
         return redirect('diary:show_detail', id=item.id)
     return HttpResponseBadRequest("Hmm.. What's wrong?")
