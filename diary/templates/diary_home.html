@@ -4,6 +4,13 @@
 {% block content %}
 
 <body>
+  <div class="text-center">
+    <a class="text-decoration-none" style="margin: 30px" href=".">
+      <h2 class="fw-bolder fs-25 mb-25">My Diary</h2>
+    </a>
+  </div>
+  
+
   <div class="container" id="content-section"></div>
     
   <!-- Modal -->
@@ -39,7 +46,8 @@
 <script>
   function createCard(item) {
     const area = document.getElementById("diary-area");
-    area.insertAdjacentHTML('beforeend', '<div class="card w-100" style="margin-top: 10px"><div class="card-body"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div>')
+    area.insertAdjacentHTML('beforeend', '<div class="card shadow border-0 bg-light" style="margin:30px 30px"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text">' + item.fields.body + '</p><p class="card-text mb-2 text-muted">' + item.fields.date + '</p></div></div>') 
+    console.log(item.pk)
   }
   
 

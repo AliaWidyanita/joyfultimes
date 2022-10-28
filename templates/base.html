@@ -22,7 +22,7 @@
     {% if user.is_authenticated %}
     <a class="btn btn-primary" role="button" style="text-align:right">Mood Tracker</a>
     <a class="btn btn-primary" role="button" style="text-align:right">Mental Health Assesment</a>
-    <a class="btn btn-primary" role="button" style="text-align:right">Diary</a>
+    <a class="btn btn-primary" href="{% url 'diary:show_diary' %}"role="button" style="text-align:right">Diary</a>
     <a class="btn btn-primary" href="{% url 'authentications:logout' %}" role="button" style="margin:0px 20px">Logout</a>
     {% else %}
     <a class="btn btn-primary" href="{% url 'authentications:login' %}" role="button" style="margin:0px 20px">Log In</a>
