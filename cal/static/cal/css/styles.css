@@ -1,7 +1,13 @@
 /* Common styles */
+@import url('https://fonts.googleapis.com/css?family=Mulish');
+@import url('https://fonts.googleapis.com/css?family=Manrope');
+@import url('https://fonts.googleapis.com/css?family=Playfair');
 body {
+  margin-bottom: 20%;
   font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url('download\ \(1\).jpg');
 }
+
 
 .left {
   float: left;
@@ -11,12 +17,62 @@ body {
   float: right;
 }
 
-.btn {
+.btn1right {
   outline: none;
-  color: black;
-  background-color: transparent;
+  color: #E1E7E0;
+  background-color: #6AA4B0;
+  margin-left: 60%;
+  margin-right: 0px;
+  cursor: pointer;
+  text-align: center;
+  display:inline-block;
+  width: 10%;
+  padding: 1px;
+  border-radius: 7px;
+  font-family: Mulish;
+  box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
+}
+.btn2right {
+  outline: none;
+  color: #E1E7E0;
+  background-color: #6AA4B0;
   box-shadow: 0 0 0 0;
-  margin-right: 3px;
+  margin-left: 2%;
+  cursor: pointer;
+  text-align: center;
+  display:inline-block;
+  width: 10%;
+  padding: 1px;
+  box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
+  border-radius: 7px;
+  font-family: Mulish;
+}
+.btnleft {
+  outline: none;
+  color: #E1E7E0;
+  background-color: #6AA4B0;
+  box-shadow: 0 0 0 0;
+  margin-left: 4%;
+  cursor: pointer;
+  text-align: center;
+  display:inline-block;
+  width: 10%;
+  padding: 1px;
+  border-radius: 7px;
+  box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
+  font-family: Mulish;
+}
+
+.btnleft:hover {
+  background-color: #2F6D80;
+}
+
+.btn1right:hover {
+  background-color: #2F6D80;
+}
+
+.btn2right:hover {
+  background-color: #2F6D80;
 }
 
 .clearfix {
@@ -34,22 +90,28 @@ body {
   background: none;
   padding: 5px;
   width: 100%;
+  font-family: Mulish;
 }
 
 /* App styles */
 .title {
   text-align: center;
   margin: 10px;
+  font-family: Playfair;
+  font-weight: bold;
+  color: #2B4560;
 }
 
 .calendar {
-  width: 98%;
+  width: 90%;
   margin: auto;
   font-size: 13px;
+  background-color: #e1e7e0bd;
+  font-family: Manrope;
 }
 
 .calendar tr, .calendar td {
-  border: 1px solid black;
+  border: 1px solid #2F6D80;
 }
 
 .calendar th {
@@ -78,5 +140,5 @@ ul {
 }
 
 a {
-  color: #17a2b8;
+  color: #2B4560;
 }
