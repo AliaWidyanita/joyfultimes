@@ -14,12 +14,10 @@
 
 
 <body style="margin-bottom: 100px;">
-  <div class="text-center"style="margin-top: 130px;">
-    <h1 class="fw-bolder fs-25 mb-25">Diary</h1>
-    <h5 style="color: #2F6D80;">My beautiful stories</h5>
+  <div class="container" id="content-section" style="margin-top: 130px;">
   </div>
 
-  <div class="container" id="content-section"></div>
+  
   
   <!-- Modal -->
   <div class="modal-dialog">
@@ -79,11 +77,11 @@
       success: (items) => {
         const area = document.getElementById("content-section")
         if (items.length == 0) {
-          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div class='ohno' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
-          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px; border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div class='text-center' id='heading'><h1 class='fw-bolder fs-25 mb-25' id='heading'>My Diary</h1><h5 style='color: #2F6D80;'>My beautiful stories</h5></div><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px; border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
           items.map(item => createCard(item));
           console.log(items);
         }
@@ -112,7 +110,15 @@
   })
 </script>
 
-
+<style>
+  .ohno {
+      width: 50%;
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+</style>
 
 
 {% endblock content %}
