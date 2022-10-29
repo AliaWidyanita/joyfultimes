@@ -18,7 +18,7 @@
   <a class="navbar-brand" style="padding:0px 20px">JoyfulTimes</a>
   <a class="btn btn-primary" href="/home/" role="button" style=" text-align:right">Home</a>
   <a class="btn btn-primary" href="{% url 'forum:Forum' %}" role="button" style=" text-align:right">Forum</a>
-  <a class="btn btn-primary" role="button" style="text-align:right">Notes</a>
+  <a class="btn btn-primary" href="{% url 'notes:get_notes' %}"role="button" style="text-align:right">Notes</a>
   <a class="btn btn-primary" role="button" style="text-align:right">Tips & Tricks</a>
     {% if user.is_authenticated %}
     <a class="btn btn-primary"  href="/cal/" role="button" style="text-align:right">Mood Tracker</a>

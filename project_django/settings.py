@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'diary',
     'cal',
     'assessment',
+    'notes',
 ]
 
 MIDDLEWARE = [
