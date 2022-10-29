@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.http import JsonResponse
 import calendar
 from django.contrib.auth.decorators import login_required
 
@@ -47,16 +48,33 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
 @login_required(login_url='authentications/login/')
 def event(request, event_id=None):
-    instance = Event()
-    if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
-    else:
-        instance = Event()
+    # instance = Event()
+    # if event_id:
+    #     instance = get_object_or_404(Event, pk=event_id)
+    # else:
+    #     instance = Event()
 
-    form = EventForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('cal:calendar'))
-    return render(request, 'cal/event.html', {'form': form})
+    # form = EventForm(request.POST or None, instance=instance)
+    # if request.POST and form.is_valid():
+    #     form.save()
+    #     return HttpResponseRedirect(reverse('cal:calendar'))
+    return render(request, 'cal/event.html')
+
+def event_post(request):
+    print("bbb")
+    if request.method == 'POST':
+        print("aaa")
+        title = request.POST['title']
+        description = request.POST['description']
+        start_time = request.POST['start_time']
+        end_time = request.POST['end_time']
+        mood_new = Event(title=title, description=description, start_time=start_time, end_time=end_time)
+        mood_new.save()
+        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time}
+        data={ 
+            'mood':mood,
+            'url': 'cal/calendar'}
+    return JsonResponse(data)
