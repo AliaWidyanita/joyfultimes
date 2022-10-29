@@ -64,17 +64,36 @@ def event(request, event_id=None):
     return render(request, 'cal/event.html')
 
 def event_post(request):
-    print("bbb")
     if request.method == 'POST':
-        print("aaa")
         title = request.POST['title']
         description = request.POST['description']
         start_time = request.POST['start_time']
         end_time = request.POST['end_time']
-        mood_new = Event(title=title, description=description, start_time=start_time, end_time=end_time)
+        range = request.POST['range']
+        mood_new = Event(title=title, description=description, start_time=start_time, end_time=end_time, range=range)
         mood_new.save()
-        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time}
+        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range}
         data={ 
             'mood':mood,
+            'url': 'cal/calendar'}
+    return JsonResponse(data)
+
+def event_edit(request, event_id):
+    event = Event.objects.get(id=event_id)
+    print(event.description, event.title)
+    return render(request, 'cal/eventedit.html', { "event" : event})
+
+def event_edit_post(request, event_id):
+    event = Event.objects.get(id=event_id)
+    if request.method == 'POST':
+        event.title = request.POST['title']
+        event.description = request.POST['description']
+        event.start_time = request.POST['start_time']
+        event.end_time = request.POST['end_time']
+        event.range = request.POST['range']
+        event.save()
+        event_resp= {'title': event.title, 'description':event.description, 'start_time':event.start_time,'end_time':event.end_time, 'range':event.range}
+        data={ 
+            'mood':event_resp,
             'url': 'cal/calendar'}
     return JsonResponse(data)
