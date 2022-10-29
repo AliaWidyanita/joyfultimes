@@ -65,8 +65,11 @@
 
 
 <body>
-  
-  
+  <h1 class="title">♕Mood Tracker♕</h1>
+  <h2>"Mental health…is not a destination, but a process. It’s about how you drive, not where you’re going."</h2> 
+  <h2>~ Noam Shpancer, PhD</h2>
+  <hr>
+
   {% block content %}
   {% endblock content %}
 </body>
@@ -80,13 +83,20 @@
 @import url('//fonts.googleapis.com/css?family=Playfair+Display');
 
 body {
-    margin-top: 9%;
+    margin-top: 100px;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
+}
+
+.card {
+  background-color: #2b456073;
+  width: 98%;
+  height: 10%;
+  margin: auto;
 }
 
 .navbar-brand {
@@ -137,9 +147,9 @@ body {
 
 .btn1right {
   outline: none;
-  color: #E1E7E0;
+  color: #2B4560;
   background-color: #afb06a;
-  margin-left: 55%;
+  margin-left: 58%;
   cursor: pointer;
   text-align: center;
   display:inline-block;
@@ -149,6 +159,7 @@ body {
   font-family: Mulish;
   box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
   font-size: 100%;
+  text-align: center;
 }
 .btnleft {
   outline: none;
@@ -159,12 +170,13 @@ body {
   cursor: pointer;
   text-align: center;
   display:inline-block;
-  width: 10%;
+  width: 12%;
   padding: 3px;
   border-radius: 7px;
   box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
   font-family: Mulish;
   font-size: 100%;
+  text-align: center;
 }
 
 .btnleft1 {
@@ -182,6 +194,7 @@ body {
   box-shadow: 3px 1px 10px 0px rgba(0,0,0,0.75);
   font-family: Mulish;
   font-size: 100%;
+  text-align: center;
 }
 
 .btnleft:hover {
@@ -221,13 +234,14 @@ body {
   font-family: Playfair;
   font-weight: bold;
   color: #2B4560;
+  margin-bottom: 10px;
 }
 
 .calendar {
   width: 90%;
-  height: 10%;
+  height: 7%;
   margin: auto;
-  font-size: 13px;
+  font-size: 12px;
   background-color: #e1e7e0bd;
   font-family: Manrope;
 }
@@ -245,15 +259,15 @@ body {
 .calendar td {
   width: 200px;
   height: 100px;
-  padding: 20px 0px 0px 5px;
+  padding: 15px 0px 0px 5px;
 }
 
 .month {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .date {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 ul {
@@ -263,5 +277,13 @@ ul {
 
 a {
   color: #2B4560;
+}
+
+h2 {
+  font-size: 13px;
+  font-style: italic;
+  font-family: Mulish;
+  text-align: center;
+  margin-bottom: 0px;
 }
 </style>
