@@ -8,9 +8,11 @@
 
 <title>Notes</title>
 
-<b class="navbar-brand" style = "color:#01010e; margin-left: 10px; margin-right: 1100px; text-align: center;">Happy Notes</b>
-<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalCreate">Add New Notes</button>
-<button type="button"><a href="{% url 'notes:delete_data' %}" role="button">Delete All</a></button>
+<div class="text-center">
+    <h1 style = "color:#01010e; text-align: center;">Happy Notes</h1>
+    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalCreate">Add New Notes</button>
+    <button type="button"><a href="{% url 'notes:delete_data' %}" role="button">Delete All</a></button>
+</div>
 
 <div id="notesCard" class="row row-cols-md-3 mx-auto justify-content-center">
 </div>
@@ -81,14 +83,19 @@
        //alert(JSON.stringify(response));      
        for(let i of response){
         isi += `
-        <div class="row">
-          <div class="col-sm-6">
-              <div class="card text-center" style="width: 18rem;">
-                <h5 class="card-title">${i.fields.title}</h5>
-                <p>Sender   : ${i.fields.sender}</p>
-                <p>Pesan    : ${i.fields.notes}</p>
-          </div>
-        </div>
+        
+            <div class="card">
+              <div class="card-header">
+                <b>${i.fields.title}</b>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                   <p>${i.fields.notes}</p>
+                   <footer class="blockquote-footer"> ${i.fields.sender}</footer>
+                </blockquote>
+               </div>
+            </div>    
+         
         `;
         $("#notesCard").html(isi);
        }    
