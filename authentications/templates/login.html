@@ -3,45 +3,64 @@
 <title>Login</title>
 {% endblock meta %}
 {% block content %}
-<div class = "login">
-    <br>
-    <br>
 
-    <h1>Welcome back!</h1>
-    <h5>Please login to continue.</h5>
-    <div class = "containerform">
-    <div class = "formbox">
-    <form method="POST" action="">
-        {% csrf_token %}
 
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                <br>
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login" style="background-color:#2954E1; color:white"></td>
-            </tr>
-        </table>
-    </form>
-    </div>
-    </div>
-    {% if messages %}
-        <ul>
+<div class = "container">
+        <div class = "login">
+            <h1 style="text-align: center;">Login</h1>
+            <form class="inline" method="POST" action="" style="max-width: max-content;">
+                {% csrf_token %}   
+                <i class="fa fa-user icon"></i>
+                <input type="text" name="username" placeholder="Username" class="form-control">
+    
+                <i class="fa fa-lock icon"></i>
+                <input type="password" name="password" placeholder="Password" class="form-control">
+    
+                <input class="btn btn-primary login-btn" type="submit" value="Login">
+            </form>
+            {% if messages %}
+            <ul>
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
-        </ul>
-    {% endif %}     
-    <br>
-    Don't have an account yet? <a href="{% url 'authentications:register' %}">Create Account</a>
-    
+            </ul>
+            {% endif %} 
+            <p style="text-align: center;">Don't have an account yet? <a href="{% url 'authentications:register' %}">Create account</a></p>
+
+        </div>
 </div>
+            
+        
+
+
+<style>
+    li {
+        color: green;
+    }
+    .login {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        max-width: 400px;
+        }
+    .login-btn {
+        margin-top: 10px;
+        margin-bottom: 16px;
+        padding: 6px 170px 10px 170px;
+        width: 100%;
+    }
+    
+    @media screen and (max-width: 600px) {
+          .login {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 90%;
+          }
+    }
+        
+    </style>
 
 {% endblock content %}
