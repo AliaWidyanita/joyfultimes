@@ -9,14 +9,14 @@
 
 <body style="margin-bottom: 100px;">
   <div class="text-center"style="margin-top: 50px;">
-    <a class="text-decoration-none" >
-      <h1 class="fw-bolder fs-25 mb-25">Diary</h1>
-    </a>
-    <h5>My beautiful stories</h5>
+    <h1 class="fw-bolder fs-25 mb-25">Diary</h1>
+    <h5 style="color: #2F6D80;">My beautiful stories</h5>
   </div>
   
 
   <div class="container" id="content-section"></div>
+
+  
     
   <!-- Modal -->
   <div class="modal-dialog">
@@ -35,7 +35,7 @@
                 <input type="text" id="title" name="title" class="form-control mb-4" placeholder="Hari ini aku bahagia" />
                 <textarea class="form-control mb-4" id="body" name="body" rows="4" placeholder="Ungkapkan ceritamu di sini"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" id="submit-diary-btn">Add diary</button>
+              <button type="submit" class="btn btn-primary" id="submit-diary-btn" style='border: none; background-color: #2F6D80;'>Add diary</button>
             </form>
           </div>
   
@@ -60,7 +60,7 @@
     var hour = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
     var res = 'Last modified at ' + wd + ', ' + da + ' ' + mo + ' ' + ye + ' ' + hour;
 
-    area.insertAdjacentHTML('beforeend', '<div class="card shadow border-0 bg-light" style="margin:30px 30px 8px 30px"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text body" style="display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + item.fields.body + '</p><p class="card-text mb-2 text-muted" id="date">'+ res + '</p></div></div><div style="margin:0px 0px 0px 40px"><a href="edit/' + item.pk + '" style="cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen-to-square" style="margin-right: 3px;"></i></a><a href="delete/' + item.pk + '" style="cursor: pointer;"><i class="fa-solid fa-trash" style="color:#D11A2A"></a></div>');
+    area.insertAdjacentHTML('beforeend', '<div class="card shadow border-0 bg-light" style="margin:30px 30px 8px 30px;"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text body" style="display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + item.fields.body + '</p><p class="card-text mb-2 text-muted" id="date">'+ res + '</p></div></div><div style="margin:0px 0px 0px 40px"><a href="edit/' + item.pk + '" style="cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen-to-square" style="margin-right: 3px; color: #2F6D80;"></i></a><a href="delete/' + item.pk + '" style="cursor: pointer;"><i class="fa-solid fa-trash" style="color:#D11A2A"></a></div>');
   }
   
 
@@ -73,11 +73,11 @@
       success: (items) => {
         const area = document.getElementById("content-section")
         if (items.length == 0) {
-          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div class='prim2' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
-          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px;'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px; border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
           items.map(item => createCard(item));
           console.log(items);
         }
