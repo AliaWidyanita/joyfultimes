@@ -74,10 +74,11 @@
   </nav>
   <!-- Navbar -->
 </header>
-
+<body>
+</body>
 {% block content %}
 {% endblock content %}
-<footer class="u-clearfix u-footer u-grey-80" id="sec-1db8" style="background-color:#2B4560; padding: 0px 80px 0px 100px" ><div class="u-clearfix u-sheet u-sheet-1">
+<footer class="u-clearfix u-footer u-grey-80" id="sec-1db8" style="background-color:#2B4560; padding: 0px 80px 0px 100px; bottom:0" ><div class="u-clearfix u-sheet u-sheet-1">
   <div class="u-clearfix u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-gutter-30 u-layout-wrap u-layout-wrap-1">
     <div class="u-gutter-0 u-layout">
       <div class="u-layout-row">
@@ -93,11 +94,11 @@
             </div><!--/position-->
           </div>
         </div>
-        <div class="u-align-left u-container-style u-layout-cell u-size-20 u-size-30-md u-layout-cell-2">
+        <!-- <div class="u-align-left u-container-style u-layout-cell u-size-20 u-size-30-md u-layout-cell-2">
           <div class="u-container-layout u-container-layout-2"></div>
-        </div>
-        <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-20 u-size-30-md u-layout-cell-3">
-          <div class="u-container-layout u-valign-top u-container-layout-3"><!--position-->
+        </div> -->
+        <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-20 u-size-30-md u-layout-cell-3" style="float:right">
+          <div class="u-container-layout u-valign-top u-container-layout-3" style="padding:20px 0px"><!--position-->
             <div data-position="" class="u-position"><!--block-->
               <div class="u-block">
                 <div class="u-block-container u-clearfix"><!--block_header-->
@@ -139,17 +140,22 @@
   #intro {
     height: 950px !important;
   }
+  
   }
   
   @media (min-width: 550px) and (max-width: 750px) {
   #intro {
     height: 1100px !important;
   }
+  
   }
   
   @media (min-width: 800px) and (max-width: 990px) {
   #intro {
     height: 600px !important;
+  }
+  .u-layout-cell-3 {
+    margin-left:380px
   }
   }
   
@@ -157,10 +163,17 @@
   font-weight: 500 !important;
   letter-spacing: 40px;
   }
-  
+  @media (min-width:991px) {
+    .u-layout-cell-3 {
+    margin-left:380px
+  }
+  }
   @media (min-width: 1600px) {
   .display-1 {
     font-size: 10rem;
+  }
+  .u-layout-cell-3 {
+    margin-left:380px
   }
   }
 </style>
