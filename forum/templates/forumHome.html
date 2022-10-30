@@ -98,7 +98,7 @@
         
         const cardUser = (data) =>
             `<div id="forum-${data.pk}">
-                <div class="card shadow border-0 bg-light" style="margin:30px 30px">
+                <div class="card shadow border-0 bg-light" style="margin:10px 50px 10px 15px">
                     <div class="card-body p-25 style="margin:10px 20px">
                         <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold">${data.topic} </div>
                         <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:#2F6D80"></i></button>
@@ -122,7 +122,7 @@
             
         const card = (data) =>
             `<div id="forum-${data.pk}">
-                <div class="card shadow border-0 bg-light" style="margin:30px 30px">
+                <div class="card shadow border-0 bg-light" style="margin:10px 50px 10px 15px">
                     <div class="card-body p-25 style="margin:10px 20px">
                         <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold">${data.topic} </div>
                         <p class="card-text mb-0">${data.description}</p>
@@ -216,7 +216,7 @@
                             </div>
                         </div>
                     </div>
-                <h2 style="margin:0px 0px; float: left" >Posts</h2>
+                <h2 style="margin:10px 0px 0px 70px; float: left" >Posts</h2>
                 <div class="grid gap-4 grid-cols-1 sm:grid-flow-cols-1 md:grid-cols-3 lg:grid-cols-4 m-4" id="todo" style="justify-content: center; align-items: center">
                 </div>     
             </div>
