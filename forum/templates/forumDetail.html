@@ -17,6 +17,45 @@
         <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="keywords" content="We&amp;apos;re Here to Heal You., Iterative Methods, Our Team">
+        <meta name="description" content="">
+        <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+        <meta name="generator" content="Nicepage 4.20.1, nicepage.com">
+        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+        <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
+        <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+        <meta name="theme-color" content="#2b4560">
+        <meta property="og:title" content="Home">
+        <meta property="og:type" content="website">
+        <style>
+            h1, h2 {
+                font-family: "Mulish";
+                
+            }
+            h1, h2  :not(footer){
+                color:#2B4560
+            }
+            h5 :not(footer) {
+                font-family: "Playfair Display";
+            }
+            p {
+                font-family: "Manrope"
+            }
+
+            .h5 :not(footer){
+                font-family: "Mulish";
+                
+            }
+            .h5, h5 :not(footer){
+                color:#2F6D80
+            }
+           
+
+            </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
          $(document).ready(function() {
@@ -104,7 +143,7 @@
                                     <div class="text-muted">${data.role}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash"></i></button>
+                            <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:#2F6D80"></i></button>
                         </div>
                         <p class="card-text mb-0" style="margin:10px 0px; float:left; font-size: 15pt">${data.description}</p>
                     </div>
@@ -131,7 +170,7 @@
 
     </head>
 
-    <body class="d-flex flex-column">
+    <body class="d-flex flex-column" style="margin:78px 0px 0px 0px">
         <main class="flex-shrink-0">
             <!-- Page Content-->
             <section class="py-5">
@@ -140,8 +179,8 @@
                             <div class="card-body p-4" style="align-items:center">
                                 <div class="d-flex h-100 align-items-center justify-content-center">
                                     <div class="text-center">
-                                        <a class="text-decoration-none" href=".">
-                                            <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'">JoyfulTime Forum</h2>
+                                        <a class="text-decoration-none" href="/forum/">
+                                            <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'">JoyFulTimes Forum</h2>
                                         </a>
                                         <div class="d-flex align-items-center mt-lg-5 mb-4" style="padding:10pt 0pt 0pt 30pt">
                                             <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
@@ -186,7 +225,7 @@
                                                 <option value="Patient's Relative">Patient's Relative</option>
                                             </select>
                                         </form>
-                                        <button type="button" class="btn btn-primary" id="add-comment" style="margin:10px 40px; width:5%">Add</button>
+                                        <button type="button" class="btn btn-primary" id="add-comment" style="margin:10px 40px; width:5%; background-color:#2B4560">Add</button>
                                     {% else %}
                                         <div class="d-flex mb-4">
                                             <!-- Parent comment-->

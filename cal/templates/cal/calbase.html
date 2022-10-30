@@ -1,4 +1,4 @@
-
+{% extends 'nav.html' %}
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -20,28 +20,29 @@
   {% endblock meta %}
 </head>
 
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" style="padding:0px 20px">JoyfulTimes</a>
-        <a class="btn btn-primary" href="/home/" role="button" style=" text-align:right">Home</a>
-        <a class="btn btn-primary" href="{% url 'forum:Forum' %}" role="button" style=" text-align:right">Forum</a>
-        <a class="btn btn-primary" role="button" style="text-align:right">Notes</a>
-        <a class="btn btn-primary" role="button" style="text-align:right">Tips & Tricks</a>
-          {% if user.is_authenticated %}
-          <a class="btn btn-primary" role="button" style="text-align:right">Mood Tracker</a>
-          <a class="btn btn-primary" role="button" style="text-align:right">Mental Health Assesment</a>
-          <a class="btn btn-primary" role="button" style="text-align:right">Diary</a>
-          <a class="btn btn-primary" href="{% url 'authentications:logout' %}" role="button" style="margin:0px 20px">Logout</a>
-          {% else %}
-          <a class="btn btn-primary" href="{% url 'authentications:login' %}" role="button" style="margin:0px 20px">Log In</a>
-          {% endif %}
-      </nav>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<body>
+<body class="d-flex flex-column mt-5">
   <h1 class="title">Mood Tracker</h1>
   <hr>
-
+  {% if user.is_authenticated %}
   {% block content %}
   {% endblock %}
+  {% else %}
+    <div class="d-flex mb-4">
+        <!-- Parent comment-->
+        <div class="flex-shrink-0" style="margin:20px 10px 20px 15px "><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+        <div class="ms-3">
+            <div class="h6 fw-bolder" style="margin:20px 0px">Silahkan <a href="/authentications/login">Login</a> untuk memberikan komentar</div>
+        </div>
+    </div>
+{% endif %}
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,38 +1,91 @@
 {% extends 'base.html' %}
 {% block meta %}
-<html>
+
 <title>Sign Up/title>
 {% endblock meta %}
 
 {% block content %}
-<body>
-    <div class = "login">
-        <br>
-        <br>
-        <h1>Sign Up</h1>  
-            <div class = registerbox>
-            <form method="POST" >  
+<div style="background-color:#E1E7E0">
+    <div class="container">
+        <div class="register position-absolute top-50 start-50 translate-middle">
+        
+            <h2 style="text-align: center; margin-bottom: 20px;">Sign Up</h2>  
+                
+            <form method="POST">  
                 {% csrf_token %}  
-                <table>  
-                    {{ form.as_table }}  
-                    <tr>  
-                        <td></td>
-                        <td><input class="btn login_btn" type="submit" value="Sign Up" style="background-color:#2954E1; color:white"></td>
-                        <td></td>
-                    </tr>  
-                </table>  
+    
+                <table>
+                    {% for field in form %}
+                
+                    <tr><td>{{ field.label_tag }}</td></tr>
+                    <tr><td>{{ field }}</td></tr>
+                    <tr><td>{{ field.errors }}</td></tr>
+                    
+                    {% endfor %}
+                </table>
+                <input class="btn btn-primary create-btn" type="submit" name="submit" value="Create account"/>
             </form>
-    
-            </div>
-        {% if messages %}  
-            <ul>   
-                {% for message in messages %}  
-                    <li>{{ message }}</li>  
-                    {% endfor %}  
-            </ul>   
-        {% endif %}
-    
-    </div> 
-    </body> 
-    </html>
+                
+            <p style="text-align: center;">Already have an account? <a href="{% url 'authentications:login' %}">Login</a></p>
+        
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                        {% endfor %}  
+                </ul>   
+            {% endif %}
+        
+        </div>  
+    </div>
+</div>
+
+
+<style>
+    li {
+        color: red;
+    }
+    .form {
+    justify-content: center;
+    align-items: centerS;
+    }
+
+    .registers {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 400px;
+    }
+
+    input, textarea {
+    width: 100%;
+    margin: 0.1rem 0 0.2rem 0;
+    padding: 5px 185px 5px 12px;
+    }
+
+    .create-btn {
+    background-color: #2B4560;
+    border:none;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    padding: 6px 140px 10px 140px;
+    width: 100%;
+    }
+
+    .create-btn:hover {
+        background-color: #22364b;
+    }
+
+    @media screen and (max-width: 600px) {
+      .register {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 90%;
+      }
+
+    }
+</style>
     {% endblock content %}

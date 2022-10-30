@@ -8,10 +8,12 @@ Calendar
 
 <div class="clearfix">
 	<a class="btnleft" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn1right" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn2right" href="{% url 'cal:event_new' %}"> New Record </a>
+	<a class="btnleft1" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
+	<a class="btn1right" href="{% url 'cal:event_new' %}"> New Record </a>
 </div>
+<body class="d-flex flex-column">
+    {{ calendar }}
+</body>
 
-{{ calendar }}
 
 {% endblock %}

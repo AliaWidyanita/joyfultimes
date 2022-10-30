@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-size: 16px;">
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Forum | JoyFulTimes</title>
@@ -15,12 +15,44 @@
         <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="keywords" content="We&amp;apos;re Here to Heal You., Iterative Methods, Our Team">
+        <meta name="description" content="">
+        <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+        <meta name="generator" content="Nicepage 4.20.1, nicepage.com">
+        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+        <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
+        <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+        <meta name="theme-color" content="#2b4560">
+        <meta property="og:title" content="Home">
+        <meta property="og:type" content="website">
         <style>
-            body {
-                font-family: 'Mulish';
+            h1, h2 {
+                font-family: "Mulish";
+                
             }
-            
+            h1, h2  :not(footer){
+                color:#2B4560
+            }
+            h5 :not(footer) {
+                font-family: "Playfair Display";
+            }
+            p {
+                font-family: "Manrope"
+            }
+
+            .h5 :not(footer){
+                font-family: "Mulish";
+                
+            }
+            .h5, h5 :not(footer){
+                color:#2F6D80
+            }
+           
+
             </style>
         <script>
         $(document).ready(function() {
@@ -69,7 +101,7 @@
                 <div class="card shadow border-0 bg-light" style="margin:30px 30px">
                     <div class="card-body p-25 style="margin:10px 20px">
                         <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold">${data.topic} </div>
-                        <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash"></i></button>
+                        <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:#2F6D80"></i></button>
                         <p class="card-text mb-0">${data.description}</p>
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
@@ -84,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/forum/detail/${data.pk}" style="padding:0px 20px 20px 20px; text-align:right">See Comments</a>
+                    <a href="/forum/detail/${data.pk}" style="padding:0px 20px 20px 20px; text-align:right; color:#2F6D80">See Comments</a>
                 </div>
             </div>`
             
@@ -107,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/forum/detail/${data.pk}" style="padding:0px 20px 20px 20px; text-align:right">See Comments</a>
+                    <a href="/forum/detail/${data.pk}" style="padding:0px 20px 20px 20px; text-align:right; color:#2F6D80">See Comments</a>
                 </div>
             </div>`
             
@@ -128,7 +160,7 @@
         </script>
     </head>
       
-    <body class="d-flex flex-column">
+    <body class="d-flex flex-column" style="margin:78px 0px 0px 0px">
         <div class="container px-5 py-5">
             <div class="row gx-5">
                     <div class="card border-0 h-50 bg-light">
@@ -136,7 +168,7 @@
                             <div class="h-100 align-items-center justify-content-center">
                                 <div class="text-center">
                                     <a class="text-decoration-none" href=".">
-                                        <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'">JoyfulTime Forum</h2>
+                                        <h2 class="fw-bolder fs-25 mb-25" style="color:#2B4560">JoyfulTimes Forum</h2>
                                     </a>
                                     {% if user.is_authenticated %}
                                     <body class="d-flex flex-column" style="height:40px">
@@ -145,7 +177,7 @@
                                                 <div>
                                                     <div class="text-center mb-5">
                                                         <h1 class="fw-bolder">Create Forum</h1>
-                                                        <p class="lead fw-normal text-muted mb-0">Write your thoughts</p>
+                                                        <p class="lead fw-normal text-muted mb-0" style="font-family:Playfair Display; font-weight:bold">Write your thoughts</p>
                                                     </div>
                                                     <div class="row gx-5 justify-content-center">
                                                         <div>
@@ -173,7 +205,7 @@
                                                                     <option value="Patient's Relative">Patient's Relative</option>
                                                                 </select>
                                                             </form>
-                                                            <button type="button" class="btn btn-primary" id="add-post" style="margin:20px 20px">Add</button>
+                                                            <button type="button" class="btn btn-primary" id="add-post" style="margin:20px 20px; background-color:#2F6D80">Add</button>
                                                         </div>
                                                     </div>
                                                 </div>

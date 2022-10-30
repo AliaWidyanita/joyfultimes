@@ -6,7 +6,9 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.http import JsonResponse
 import calendar
+
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
 from .utils import Calendar
@@ -14,6 +16,7 @@ from .forms import EventForm
 
 def index(request):
     return HttpResponse('hello')
+
 
 class CalendarView(generic.ListView):
     model = Event
@@ -49,7 +52,7 @@ def next_month(d):
     return month
 
 
-@login_required(login_url='authentications/login/')
+@login_required(login_url='/authentications/login')
 def event(request, event_id=None):
     # instance = Event()
     # if event_id:
@@ -62,19 +65,41 @@ def event(request, event_id=None):
     #     form.save()
     #     return HttpResponseRedirect(reverse('cal:calendar'))
     return render(request, 'cal/event.html')
-
+@login_required(login_url='/authentications/login')
+@csrf_exempt
 def event_post(request):
-    print("bbb")
     if request.method == 'POST':
-        print("aaa")
         title = request.POST['title']
         description = request.POST['description']
         start_time = request.POST['start_time']
         end_time = request.POST['end_time']
-        mood_new = Event(title=title, description=description, start_time=start_time, end_time=end_time)
+        range = request.POST['range']
+        mood_new = Event(title=title, description=description, start_time=start_time, end_time=end_time, range=range)
         mood_new.save()
-        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time}
+        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range}
         data={ 
             'mood':mood,
+            'url': 'cal/calendar'}
+    return JsonResponse(data)
+@login_required(login_url='/authentications/login')
+def event_edit(request, event_id):
+    event = Event.objects.get(id=event_id)
+    print(event.description, event.title)
+    return render(request, 'cal/eventedit.html', { "event" : event})
+
+@login_required(login_url='/authentications/login')
+@csrf_exempt
+def event_edit_post(request, event_id):
+    event = Event.objects.get(id=event_id)
+    if request.method == 'POST':
+        event.title = request.POST['title']
+        event.description = request.POST['description']
+        event.start_time = request.POST['start_time']
+        event.end_time = request.POST['end_time']
+        event.range = request.POST['range']
+        event.save()
+        event_resp= {'title': event.title, 'description':event.description, 'start_time':event.start_time,'end_time':event.end_time, 'range':event.range}
+        data={ 
+            'mood':event_resp,
             'url': 'cal/calendar'}
     return JsonResponse(data)

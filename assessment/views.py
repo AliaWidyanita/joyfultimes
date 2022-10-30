@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Function for render main, html, and display quiz object
 def assessment(request):
-    assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+    assessment = MentalHealthAssessment.objects.all()
     context = {'quizs' : assessment}
     return render(request, 'main.html', context)
 
