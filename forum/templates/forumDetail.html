@@ -103,7 +103,7 @@
         
         const card = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card shadow border-0 bg-light" style="margin:10px 40px 10px 50px">
+                <div class="card shadow border-0 bg-light" style="margin:10px 50px 10px 50px">
                     <div class="card-body p-25 style="margin:20px 20px">
         
                     </div>
@@ -128,7 +128,7 @@
 
             const cardUser = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card shadow border-0 bg-light" style="margin:10px 40px 10px 50px">
+                <div class="card shadow border-0 bg-light" style="margin:10px 50px 10px 50px">
                     <div class="card-body p-25 style="margin:20px 20px">
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
@@ -182,7 +182,7 @@
                                         <a class="text-decoration-none" href="/forum/">
                                             <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'">JoyFulTimes Forum</h2>
                                         </a>
-                                        <div class="d-flex align-items-center mt-lg-5 mb-4" style="padding:10pt 0pt 0pt 30pt">
+                                        <div class="d-flex align-items-center mt-lg-5 mb-4" style="justify-content: center; align-items: center;">
                                             <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
                                             <div class="ms-3">
                                                 <div class="fw-bold">{{forumPost.author}}</div>
@@ -231,7 +231,7 @@
                                             <!-- Parent comment-->
                                             <div class="flex-shrink-0" style="margin:20px 10px 20px 15px "><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                             <div class="ms-3">
-                                                <div class="h6 fw-bolder" style="margin:20px 0px">Silahkan <a href="/authentications/login">Login</a> untuk memberikan komentar</div>
+                                                <div class="h6 fw-bolder" style="margin:20px 0px">Please <a href="/authentications/login">Login</a> to leave a comment</div>
                                             </div>
                                         </div>
                                     {% endif %}
