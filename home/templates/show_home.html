@@ -15,7 +15,6 @@
   }
 
 </style>
-{% extends 'base.html' %}
 {% load static %}
 {% block meta %}
 {% endblock meta %}
@@ -38,8 +37,9 @@
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
   </head>
+  {% include "nav_uni.html" %}
   <body class="u-body u-xl-mode" data-lang="en" >
-    <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="1587" data-image-height="2245" id="sec-b6d4"  style="margin:77px 0px 0px 0px">
+    <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="1587" data-image-height="2245" id="sec-b6d4">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-text u-title u-text-1" style="font-family:Playfair; font-weight:bold">It's time to talk with people who will support you.</h1>
         <p class="u-large-text u-text u-text-variant u-text-2"> We are a friendly, safe community supporting each other's mental health 24 hours a day, 365 days a year. You are most welcome to&nbsp;<a href="https://www.mentalhealthforum.net/forum/register/" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">
@@ -89,15 +89,15 @@
     <section>
       <div class="u-clearfix u-sheet u-sheet-1 mb-4 mt-5">
             <h2 class="u-text u-text-default u-text-1" style="color: #2B4560; font-family:Playfair; text-align:center; padding:0px 70px 0px 70px; width:100%; font-weight: bold;">What Exactly is “Mental Health”?</h2>
-            <p style="padding:0px 70px 0px 70px; text-align:center">Good question, because “mental health” can mean different things to different people. Mental health is a continuum that stretches from where we’re feeling good to the other end of the continuum where we’re struggling because of a challenge or a condition like depression. Where we are on that continuum is influenced by various factors. Some we can control (how we take care of ourselves or our support networks) and some we can’t (our genetics or how we were raised). 
-            </p><p style="padding:0px 70px 20px 70px; text-align: center">When our mental health is strong it can help us thrive. When we’re struggling, we may need to seek out self-care and coping practices, and/or the support of professionals.</p>
+            <p style="padding:0px 70px 0px 70px; text-align:justify">Good question, because “mental health” can mean different things to different people. Mental health is a continuum that stretches from where we’re feeling good to the other end of the continuum where we’re struggling because of a challenge or a condition like depression. Where we are on that continuum is influenced by various factors. Some we can control (how we take care of ourselves or our support networks) and some we can’t (our genetics or how we were raised). 
+            </p><p style="padding:0px 70px 20px 70px; text-align: justify">When our mental health is strong it can help us thrive. When we’re struggling, we may need to seek out self-care and coping practices, and/or the support of professionals.</p>
   </div>
   </section>
 </section>
 <section class="u-align-center u-clearfix u-section-2" >
   <div class="u-expanded-width u-list u-list-1" style="background-color:#E1E7E0;">
     <h2 class="u-text u-text-default u-text-1">Make Your Move</h2>
-    <i><p class="u-text u-text-2" style="text-align: center;"> "You are not your illness. You have an individual story to tell. You have a name, a history, a personality. Staying yourself is part of the battle." — Julian Seifter</p></i>
+    <i><p class="u-text u-text-2" style="text-align: center; width:100%"> "You are not your illness. You have an individual story to tell. You have a name, a history, a personality. Staying yourself is part of the battle." — Julian Seifter</p></i>
   </div>
   <div class="u-clearfix u-sheet u-sheet-1">
     <div class="u-expanded-width u-list u-list-1" style="background-color:#ffffff95;">
@@ -165,6 +165,7 @@
       </div>
     </section>  
 </body>
+{% include "footer.html"%}
 </html>
 
 {% endblock content %}
