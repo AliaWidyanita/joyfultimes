@@ -1,12 +1,6 @@
-<style>
-  footer {
-    display: block;
-  }
-</style>
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,64 +28,24 @@
   <meta property="og:title" content="Home">
   <meta property="og:type" content="website">
 </head>
-
-<nav class="navbar navbar-expand-lg fixed-top navbar-scroll" style="background-color: #2B4560; height: 100px">
-  <div class="container-fluid" style="margin-left: 20px;">
-    <a class="navbar-brand" href="{% url 'home:show_home' %}">&#128515; JoyFulTimes</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'forum:Forum' %}">Forum</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!">Notes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'cal:calendar' %}">Mood Tracker</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'assessment:assessment' %}">Assesment</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'diary:show_diary' %}">Diary</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav d-flex flex-row">
-      
-        <li class="nav-item me-3 me-lg-0">
-          {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'authentications:logout' %}">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </a>
-          {% else %}
-          <a class="btn btn-primary nav-link" href="{% url 'authentications:login' %}" role="button" style="background-color: white; color: #2B4560; margin:0px 20px; border:none; padding: 10px 40px 10px 40px;">Login</a>
-          {% endif %}
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-scroll" style="background-color: #2B4560;">
+    <div class="container-fluid" style="margin-left: 20px;">
+      <a class="navbar-brand" href="{% url 'home:show_home' %}">&#128515; JoyFulTimes</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <a class="nav-link" href="{% url 'forum:Forum' %}">Forum</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#!">Notes</a>
+            <a class="nav-link" href="{% url 'notes:get_notes' %}">Notes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'cal:calendar' %}">Mood Tracker</a>
@@ -120,12 +74,9 @@
   </nav>
   <!-- Navbar -->
 </header>
-{% block content %}
-<body>
-  
-</body>
-{% endblock content %}
 
+{% block content %}
+{% endblock content %}
 <footer class="u-clearfix u-footer u-grey-80" id="sec-1db8" style="background-color:#2B4560; padding: 0px 80px 0px 100px" ><div class="u-clearfix u-sheet u-sheet-1">
   <div class="u-clearfix u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-gutter-30 u-layout-wrap u-layout-wrap-1">
     <div class="u-gutter-0 u-layout">
@@ -164,8 +115,6 @@
   <p class="u-align-center u-small-text u-text u-text-variant u-text-5"> Copyright © 2022 JoyfulTimes by PBP Group B-05</p>
 </div></footer>
 </html>
-
-
 <style>
   .btn-primary:hover {
     background-color: rgb(63, 24, 24);
