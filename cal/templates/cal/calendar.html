@@ -5,15 +5,20 @@ Calendar
 {% endblock %}
 
 {% block content %}
-
+<b><h1 class="title">♕Mood Tracker♕</h1></b>
+<p class="sub">"Mental health…is not a destination, but a process. It’s about how you drive, not where you’re going."</p> 
+<p class="sub">~ Noam Shpancer, PhD</p>
+<hr>  
 <div class="clearfix">
 	<a class="btnleft" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btnleft1" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
 	<a class="btn1right" href="{% url 'cal:event_new' %}"> New Record </a>
 </div>
-<body class="d-flex flex-column">
-    {{ calendar }}
-</body>
+<table class="calendar">
+{{calendar}}
+</table>
+<br><br><br>
+
 
 
 {% endblock %}
