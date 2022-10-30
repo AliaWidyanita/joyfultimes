@@ -5,16 +5,15 @@
 {% endblock meta %}
 
 {% block content %}
-<div style="background-color:#E1E7E0">
-    <div class="container">
-        <div class="register position-absolute top-50 start-50 translate-middle">
-        
+<div>
+    <div class="vh-100 d-flex justify-content-center align-items-center" style="margin-bottom: -50px; margin-top: 50px;">
+        <div class="col-md-4 rounded-3">
             <h2 style="text-align: center; margin-bottom: 20px;">Sign Up</h2>  
                 
             <form method="POST">  
                 {% csrf_token %}  
     
-                <table>
+                <table style="width: 100%;">
                     {% for field in form %}
                 
                     <tr><td>{{ field.label_tag }}</td></tr>
