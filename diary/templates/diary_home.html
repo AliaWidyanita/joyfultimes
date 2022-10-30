@@ -13,8 +13,8 @@
 
 
 
-<body style="margin-bottom: 100px;">
-  <div class="container" id="content-section" style="margin-top: 130px;"></div>
+<body style="margin-top: 160px;">
+  <div class="container" id="content-section"></div>
 
   
   
@@ -80,7 +80,7 @@
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
-          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div class='text-center' id='heading'><h1 class='fw-bolder fs-25 mb-25' id='heading'>My Diary</h1><h5 style='color: #2F6D80;'>My beautiful stories</h5></div><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px; border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div id='ar'><div class='text-center' id='heading'><h1 class='fw-bolder fs-25 mb-25' id='heading'>My Diary</h1><h5 style='color: #2F6D80;'>My beautiful stories</h5></div><div id='diary-area'></div><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='margin-top: 20px; border: none; background-color: #2F6D80; margin-bottom: 80px;'> Add new diary </button></div></div>")
           items.map(item => createCard(item));
           console.log(items);
         }
