@@ -1,0 +1,29 @@
+.result-button {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 50px;
+    position: relative;
+}
+
+.result-button:before {
+    transition: all 0.8s cubic-bezier(0.7, -0.5, 0.2, 2);
+    content: '';
+    width: 1%;
+    height: 100%;
+    background: #2F6D80;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.result-button span {
+    mix-blend-mode: darken;
+}
+
+.result-button:hover:before {
+    background: #2F6D80;
+    width: 100%;
+}
