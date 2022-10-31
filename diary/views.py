@@ -20,6 +20,7 @@ def show_diary(request):
     }
     return render(request, 'diary_home.html', context)
 
+@login_required(login_url='/authentications/login')
 def show_detail(request, id):
     the_item = Diary.objects.filter(user = request.user, id=id)
     context = {"id": the_item[0].id, "item": serializers.serialize("json", the_item), "date": the_item[0].date}
@@ -38,6 +39,7 @@ def page_add(request):
             return redirect('diary:show_diary')
     return render(request, 'create.html', context)
 
+@login_required(login_url='/authentications/login')
 def json_diary(request):
     diary = Diary.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize('json', diary))

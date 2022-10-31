@@ -7,17 +7,9 @@
   <title>Diary | JoyFulTimes</title>
 </head>
 
-
-
-
-
-
-
 <body style="margin-top: 160px;">
   <div class="container" id="content-section"></div>
 
-  
-  
   <!-- Modal -->
   <div class="modal-dialog">
     <div class="modal fade" id="add-diary-modal" tabindex="-1" aria-labelledby="add-diary-modal-label" aria-hidden="true">
@@ -76,7 +68,7 @@
       success: (items) => {
         const area = document.getElementById("content-section")
         if (items.length == 0) {
-          area.insertAdjacentHTML('afterbegin', "<div class='ohno' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center mt-4'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='border: none; background-color: #2F6D80;'> Add new diary </button></div></div>")
+          area.insertAdjacentHTML('afterbegin', "<div class='ohno' id='nodiary'><h1 style='text-align: center; margin-top: 30px;'>Ouch, {{username}}!</h1><h4 style='color: #6C757D; text-align: center;'> You don't have any diary! &#128533;</h4><div class='text-center'><button type='button' class='btn btn-primary add-task' data-bs-toggle='modal' data-bs-target='#add-diary-modal' style='border: none; background-color: #2F6D80; margin-bottom: 80px;'> Add new diary </button></div></div>")
         } else {
           $("#nodiary").remove();
           $("#ar").remove()
