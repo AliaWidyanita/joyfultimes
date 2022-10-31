@@ -7,7 +7,7 @@
   <title>Diary | JoyFulTimes</title>
 </head>
 
-<body style="margin-top: 160px;">
+<body style="margin-top: 160px;" id="boddy" class="d-flex flex-column">
   <div class="container" id="content-section"></div>
 
   <!-- Modal -->
@@ -38,7 +38,6 @@
       </div>
     </div>
   </div>
-  
 </body>
 
 
@@ -53,7 +52,7 @@
     var mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
     var da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
     var hour = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    var res = 'Last modified at ' + wd + ', ' + da + ' ' + mo + ' ' + ye + ' ' + hour;
+    var res = 'Last modified on ' + wd + ', ' + da + ' ' + mo + ' ' + ye + ' ' + hour;
 
     area.insertAdjacentHTML('beforeend', '<div class="card shadow border-0 bg-light" style="margin:30px 30px 8px 30px;"><div class="card-body"><a class="text-decoration-none link-dark stretched-link" href="/diary/' + item.pk + '"><h5 class="card-title" id="card-title">' + item.fields.title + '</h5><p class="card-text body" style="display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + item.fields.body + '</p><p class="card-text mb-2 text-muted" id="date">'+ res + '</p></div></div><div style="margin:0px 0px 0px 40px"><a href="edit/' + item.pk + '" style="cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen-to-square" style="margin-right: 3px; color: #2F6D80;"></i></a><a href="delete/' + item.pk + '" style="cursor: pointer;"><i class="fa-solid fa-trash" style="color:#D11A2A"></a></div>');
   }
