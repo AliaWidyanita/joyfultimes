@@ -12,12 +12,92 @@ Calendar
 <div class="clearfix">
 	<a class="btnleft" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btnleft1" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn1right" href="{% url 'cal:event_new' %}"> New Record </a>
+	<a class="btn1right"  data-bs-toggle="modal" data-bs-target="#exampleModal"> New Record </a>
 </div>
 <table class="calendar">
 {{calendar}}
 </table>
 <br><br><br>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" id="event_post">
+			{% csrf_token %}
+          <div class="mb-3">
+            <label for="id_title" class="col-form-label">Mood:</label>
+            <select id="id_title" required="">
+				<option value="happy">🌞Happy🌞</option>
+				<option value="blessed">👼Blessed👼</option>
+				<option value="bored">🥱Bored🥱</option>
+				<option value="angry">🤬Angry🤬</option>
+				<option value="sad">⛈️Sad⛈️</option>
+				<option value="crazy">🥴Crazy🥴</option>  
+			</select> 
+          </div>
+          <div class="mb-3">
+            <label for="id-rate" class="col-form-label">Mood Rate:</label>
+            <input id="id_rate" min="1" max="10" step="1" name="mood" type="range">
+          </div>
+		  <div class="mb-3">
+            <label for="id_description" class="col-form-label">Description:</label>
+            <textarea name="description" cols="40" rows="5" required="" id="id_description"></textarea>
+          </div>
+		  <div class="mb-3">
+            <label for="id_start_time" class="col-form-label">Start Time:</label>
+            <input type="datetime-local" name="start_time" required="" id="id_start_time">
+          </div>
+		  <div class="mb-3">
+            <label for="id_end_time" class="col-form-label">End Time:</label>
+            <input type="datetime-local" name="end_time" required="" id="id_end_time">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+<script>
+	
+	$(document).ready(function () {
+      $("#event_post").submit(function (e) {
+        console.log("tes1");
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cal:event_new_post' %}",
+            data: {
+                title : $("#id_title").val(),
+                description : $("#id_description").val(),
+                start_time : $("#id_start_time").val(),
+                end_time : $("#id_end_time").val(),
+                range : $("#id_rate").val(),
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+            }, async:true,
+            success: function (response) {
+				$(".modal-dialog").append("<div class='modal fade' id='exampleModalToggle2' aria-hidden='true' aria-labelledby='exampleModalToggleLabel2' tabindex='-1'><div class='modal-dialog modal-dialog-centered'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='exampleModalToggleLabel2'>Response</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'>You feel {{title}}.</div></div></div></div>")	
+                e.preventDefault();
+				
+                console.log("tes2");
+                window.location.replace("{% url 'cal:calendar' %}")},
+        })
+      })
+	  
+    })
+
+</script>
 
 
 

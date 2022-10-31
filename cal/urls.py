@@ -9,4 +9,5 @@ urlpatterns = [
     path('event/edit/<int:event_id>',views.event_edit, name='event_edit'),
     path('event/new-post/',views.event_post, name='event_new_post'),
     path('event/edit-post/<int:event_id>',views.event_edit_post, name='event_edit_post'),
+    # path('event-delete/',views.delete_all, name='delete_all'),
     ]
