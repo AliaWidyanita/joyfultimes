@@ -5,37 +5,40 @@
 
 <head>
     <title>Edit Diary | JoyFulTimes</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
-
-<div class="container mt-5" style="margin-bottom: 80px;">
-    <h1 style="margin-bottom: 20px; margin-top: 160px;">Edit diary</h1>
-
-    <div class="row gx-5 justify-content-center">
-        <div>
-            <form action="updaterecord/{{ id }}" method="POST" > 
-                {% csrf_token %}
-                <!-- Topic input-->
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="title" name="title" type="text" value="{{ title }}">
-                    <label for="title">Title</label>
-                </div>
-                <!-- Description input-->
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" id="body" name="body" type="text" style="height: 15rem">{{ body }}</textarea>
-                    <label for="body">Body</label>
-                </div>
-                <div class="buttons" style="margin-top: 30px;">
-                    <a href="{% url 'diary:show_detail' id%}" style="cursor: pointer;"><button type="button" class="btn btn-secondary" style="margin-right: 5px; border: none;">Back</button></a>
-                    <input type="submit" class="btn btn-primary" value="Save changes" style="border: none; background-color: #2F6D80;">
-                </div>
+<body>
+    <div class="container mt-5" style="margin-bottom: 80px;">
+        <h1 style="margin-bottom: 20px;">Edit diary</h1>
+    
+        <div class="row gx-5 justify-content-center">
+            <div>
+                <form action="updaterecord/{{ id }}" method="POST" > 
+                    {% csrf_token %}
+                    <!-- Topic input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="title" name="title" type="text" value="{{ title }}">
+                        <label for="title">Title</label>
+                    </div>
+                    <!-- Description input-->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="body" name="body" type="text" style="height: 15rem">{{ body }}</textarea>
+                        <label for="body">Body</label>
+                    </div>
+                    <div class="buttons" style="margin-top: 30px;">
+                        <a href="{% url 'diary:show_detail' id%}" style="cursor: pointer;"><button type="button" class="btn btn-secondary" style="margin-right: 5px; border: none;">Back</button></a>
+                        <input type="submit" class="btn btn-primary" value="Save changes" style="background-color: #2F6D80;">
+                    </div>
+                    
+                </form>
                 
-            </form>
-            
-            
+                
+            </div>
         </div>
     </div>
-</div>
+</body>
+
 
 
 {% endblock content %}
