@@ -76,10 +76,14 @@ def delete_data(request):
 
 @login_required(login_url='/authentications/login')
 def get_notes_all(request):
-    form = addNotesForm()
     data_notes = Notes.objects.all()
     context = {
             'list_notes' : data_notes,
-            'form' : form,
         }
-    return render(request, 'notes_page.html', context)
+    return render(request, 'notes_userpage.html', context)
+
+def notes_json_all(request):
+    data_notes = list(Notes.objects.all())
+    
+    notes = serializers.serialize('json', Notes.objects.all())
+    return HttpResponse(notes, content_type="application/json")
