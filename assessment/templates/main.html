@@ -10,26 +10,27 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 
-<body style="margin-bottom: 100px;">
-    <div class="container text-center" id="content-section" style="margin-top: 130px;">
-        <!-- Header -->
-        <header class="ex-header" style="background: #2B4560">
-            <div class="container">
-                <div class="row">
-                    <div class="text-center">
-                        <h1 class="fw-bolder fs-25 mb-25" style="font-family:Playfair; color: white;">Mental Health Assessment</h1>
-                    </div>
-                </div>
+<!-- Header -->
+<header class="ex-header" style="background: #2B4560">
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h1 class="fw-bolder fs-25 mb-25" style="font-family:Playfair; color: white;">Mental Health Assessment</h1>
             </div>
-        </header>
-        <br>
-        <!-- end of header -->
+        </div>
+    </div>
+</header>
+<!-- end of header -->
+
+<body style="margin-bottom: 100px;">
+    <div class="container text-center" id="content-section">
 
         <!-- User Logged In -->
         {% if user.is_authenticated %}
             <!-- Assessment content -->
             <h3 class="fw-bolder fs-25 mb-25" style="font-family:Mulish;">Assessment List</h3>
-            <hr>
+            <hr style="width: 300px; align-self: center;">
             <div class="sub-content">
                 <div class="card" style="margin:30px 30px 8px 30px;">
                     <div class="card-body">
@@ -59,6 +60,9 @@
                     </div>
                 </div>
             </div>
+            <!-- end of assessment content -->
+        <!-- end of user logged in -->
+            
         <!-- User Not Logged In -->
         {% else %}
             <h4 class="title" style="font-family:Mulish;">You are not logged in</h4>
@@ -67,6 +71,7 @@
                 <a href="{% url 'authentications:login' %}" role="button" class="btn-login" aria-pressed="true" style="color: white;"><span>Log In</span></a>
                 <a href="{% url 'authentications:register' %}" role="button" class="btn-signup" aria-pressed="true"><span>Sign Up</span></a>
               </div>
+        <!-- end of user not logged in -->
         {% endif %}
     </div>
 </div>

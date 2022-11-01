@@ -16,7 +16,7 @@ def depression_assessment(request):
     form = DepressionTest()
 
     if request.user.is_authenticated:
-        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
     else:
         hasil_assessment = None
 
@@ -44,14 +44,14 @@ def depression_assessment_json(request):
                 result = "No Depression"
 
             if request.user.is_authenticated:
-                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
                 if hasil_assessment:
-                    hasil_assessment.depression_result = result
+                    hasil_assessment.result = result
                     hasil_assessment.save()
                 else:
-                    hasil_assessment = MentalHealthAssessment(user=request.user, depression_result=result)
+                    hasil_assessment = MentalHealthAssessment(user=request.user, topic=1, result=result)
                     hasil_assessment.save()
-            return JsonResponse({'depression_result': result})
+            return JsonResponse({'result': result})
         else:
             return JsonResponse({'error': form.errors})
     return redirect('assessment:depression_assessment')
@@ -61,7 +61,7 @@ def anxiety_assessment(request):
     form = AnxietyTest()
 
     if request.user.is_authenticated:
-        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
     else:
         hasil_assessment = None
 
@@ -89,14 +89,14 @@ def anxiety_assessment_json(request):
                 result = "No Anxiety"
 
             if request.user.is_authenticated:
-                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
                 if hasil_assessment:
-                    hasil_assessment.anxiety_result = result
+                    hasil_assessment.result = result
                     hasil_assessment.save()
                 else:
-                    hasil_assessment = MentalHealthAssessment(user=request.user, anxiety_result=result)
+                    hasil_assessment = MentalHealthAssessment(user=request.user, topic=2, result=result)
                     hasil_assessment.save()
-            return JsonResponse({'anxiety_result': result})
+            return JsonResponse({'result': result})
         else:
             return JsonResponse({'error': form.errors})
     return redirect('assessment:anxiety_assessment')
@@ -106,7 +106,7 @@ def stress_assessment(request):
     form = StressTest()
 
     if request.user.is_authenticated:
-        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+        hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
     else:
         hasil_assessment = None
 
@@ -134,46 +134,110 @@ def stress_assessment_json(request):
                 result = "No Stress"
 
             if request.user.is_authenticated:
-                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+                hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
                 if hasil_assessment:
-                    hasil_assessment.stress_result = result
+                    hasil_assessment.result = result
                     hasil_assessment.save()
                 else:
-                    hasil_assessment = MentalHealthAssessment(user=request.user, stress_result=result)
+                    hasil_assessment = MentalHealthAssessment(user=request.user, topic=3, result=result)
                     hasil_assessment.save()
-            return JsonResponse({'stress_result': result})
+            return JsonResponse({'result': result})
         else:
             return JsonResponse({'error': form.errors})
     return redirect('assessment:stress_assessment')
 
-# Function for adding user result
+# Function for adding user depression result
 @csrf_exempt
-def add_result(request):
+def add_depression_result(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
             data = json.loads(request.body)
             result = data["result"]
             
-            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
             if hasil_assessment:
-                hasil_assessment.depression_result = result
+                hasil_assessment.result = result
                 hasil_assessment.save()
             else:
-                hasil_assessment = MentalHealthAssessment(user=request.user, depression_result=result)
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=1, result=result)
                 hasil_assessment.save()
 
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
 
-# Function for fetching user result
+# Function for fetching user depression result
 @csrf_exempt
-def fetch_result(request):
+def fetch_depression_result(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user).first()
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
             if hasil_assessment:
-                return JsonResponse({"result": hasil_assessment.depression_result, "date": hasil_assessment.date}, status=200)
-        return JsonResponse({"depression_result": "", "date": ""}, status=200)
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+# Function for adding user anxiety result
+@csrf_exempt
+def add_anxiety_result(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            result = data["result"]
+            
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
+            if hasil_assessment:
+                hasil_assessment.result = result
+                hasil_assessment.save()
+            else:
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=2, result=result)
+                hasil_assessment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+# Function for fetching user anxiety result
+@csrf_exempt
+def fetch_anxiety_result(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
+            if hasil_assessment:
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+# Function for adding user stress result
+@csrf_exempt
+def add_stress_result(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            result = data["result"]
+            
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
+            if hasil_assessment:
+                hasil_assessment.result = result
+                hasil_assessment.save()
+            else:
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=3, result=result)
+                hasil_assessment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+# Function for fetching user stress result
+@csrf_exempt
+def fetch_stress_result(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
+            if hasil_assessment:
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
