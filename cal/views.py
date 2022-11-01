@@ -5,6 +5,7 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 import calendar
 
 from django.contrib.auth.decorators import login_required
