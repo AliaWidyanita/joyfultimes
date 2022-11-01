@@ -22,69 +22,93 @@
 </header>
 <!-- end of header -->
 
-<!-- Last Result -->
-<div class="ex-basic-1 pt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-                {% if hasil_assessment %}
-                <div id="past-result" class="card text-center mb-4">
-                    <div class="card-header">
-                        Last {{name}} Result
+<!-- User Logged In -->
+{% if user.is_authenticated %}
+    <!-- Last Result -->
+    <div class="ex-basic-1 pt-5">
+        <div class="container">
+            <div class="row">
+                <!-- Back Button -->
+                <a href="{% url 'assessment:assessment' %}">
+                    <button class="back-button" type="button" style="float: left; font-family:Manrope; background: transparent; color: #2F6D80; border: 0;">< back</button>
+                </a>
+                <!-- end of back button -->
+                <div class="col-xl-10 offset-xl-1">
+                    {% if hasil_assessment %}
+                    <div id="past-result" class="card text-center mb-4">
+                        <div class="card-header" style="font-family:Mulish;">
+                            Last {{name}} Result
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-family:Manrope;">{{ hasil_assessment.result }}</h5>
+                        </div>
+                        <div class="card-footer text-muted" style="font-family:Manrope;">
+                            {{ hasil_assessment.date }}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ hasil_assessment.result }}</h5>
-                    </div>
-                    <div class="card-footer text-muted">
-                        {{ hasil_assessment.date }}
-                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
-</div>
-<!-- end of last result -->
+    <!-- end of last result -->
 
-<!-- Assessment Form -->
-<div class="ex-basic-1 pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-                <form action="/assessment/{{url}}-assessment-json/" method="POST" id="assessmentform" class="form">
-                    {% csrf_token %}
-                    <table class="table table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th style="width: 50%">In the last 2 weeks, how often are you bothered by the following problems?</th>
-                                <th style="width: 12.5%" class="text-center">Never</th>
-                                <th style="width: 12.5%" class="text-center">Sometimes</th>
-                                <th style="width: 12.5%" class="text-center">Often</th>
-                                <th style="width: 12.5%" class="text-center">Very Often</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for field in form %}
-                            <tr>
-                                <td><label class="" for="{{ field.auto_id }}">{{ field.label }}</label></th>
-                
-                                {% for choice in field %}
-                                <td class="text-center align-middle">{{ choice }}</th>
+    <!-- Assessment Form -->
+    <div class="ex-basic-1 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <form action="/assessment/{{url}}-assessment-json/" method="POST" id="assessmentform" class="form">
+                        {% csrf_token %}
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="font-family:Mulish; width: 50%">In the last 2 weeks, how often are you bothered by the following problems?</th>
+                                    <th style="font-family:Mulish; width: 12.5%" class="text-center">Never</th>
+                                    <th style="font-family:Mulish; width: 12.5%" class="text-center">Sometimes</th>
+                                    <th style="font-family:Mulish; width: 12.5%" class="text-center">Often</th>
+                                    <th style="font-family:Mulish; width: 12.5%" class="text-center">Very Often</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for field in form %}
+                                <tr>
+                                    <td style="font-family:Manrope;"><label class="" for="{{ field.auto_id }}">{{ field.label }}</label></th>
+                    
+                                    {% for choice in field %}
+                                    <td class="text-center align-middle">{{ choice }}</th>
+                                    {% endfor %}
+                    
+                                </tr>
                                 {% endfor %}
-                
-                            </tr>
-                            {% endfor %}
-                            <tr class="table-active">
-                                <td>Assessment Result</td>
-                                <td colspan='4' class="text-center font-weight-bold" id='result'></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button class="result-button" type="submit" style="float: right;"><span>View Results</span></button>
-                </form>
+                                <tr class="table-active">
+                                    <td style="font-family:Mulish;">Assessment Result</td>
+                                    <td colspan='4' class="text-center font-weight-bold" id='result' style="font-family:Manrope;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="result-button" type="submit" style="float: right; font-family:Manrope;"><span>View Results</span></button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end of assessment form -->
+    <!-- end of assessment form -->
+
+<!-- User Not Logged In -->
+{% else %}
+    <body style="margin-bottom: 100px;">
+        <div class="container text-center" id="content-section">
+            <br>
+            <h4 class="title" style="font-family:Mulish;">You are not logged in</h4>
+            <p style="font-family:Manrope;">Please log in or sign up to continue</p>
+            <div class="d-flex flex-row justify-content-center gap-3">
+                <a href="{% url 'authentications:login' %}" role="button" class="btn-login" aria-pressed="true" style="color: white;  font-family:Manrope;"><span>Log In</span></a>
+                <a href="{% url 'authentications:register' %}" role="button" class="btn-signup" aria-pressed="true" style="font-family:Manrope;"><span>Sign Up</span></a>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endif %}
+<!-- end of user not logged in -->
 {% endblock %}
