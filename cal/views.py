@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, date
+from urllib import request
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
@@ -18,15 +19,14 @@ from .forms import EventForm
 def index(request):
     return HttpResponse('hello')
 
-
+# @login_required(login_url='/authentications/login')
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'cal/calendar.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get('month', None))
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(d.year, d.month, self.request.user)
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
