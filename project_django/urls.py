@@ -26,4 +26,5 @@ urlpatterns = [
     path('cal/', include('cal.urls')),
     path('assessment/', include('assessment.urls')),
     path('notes/', include('notes.urls')),
+    path('newNotes/',include('newNotes.urls')),
 ]
