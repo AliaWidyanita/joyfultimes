@@ -25,19 +25,20 @@
 
 <body style="margin-bottom: 100px;">
     <div class="container text-center" id="content-section">
+        <br>
 
         <!-- User Logged In -->
         {% if user.is_authenticated %}
             <!-- Assessment content -->
             <h3 class="fw-bolder fs-25 mb-25" style="font-family:Mulish;">Assessment List</h3>
-            <hr style="width: 300px; align-self: center;">
+            <hr>
             <div class="sub-content">
                 <div class="card" style="margin:30px 30px 8px 30px;">
                     <div class="card-body">
                         <h4 class="card-title text-center fw-bolder" id="card-title" style="font-family:Mulish;">Depression Assessment</h4>
                         <p class="card-text body text-justify" style="font-family:Manrope; display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">If you're unsure if you are depressed, our 5-minute test can help evaluate your mood.</p>
                         <a href="{% url 'assessment:depression_assessment' %}">
-                            <button class="test-button" type="button" style="float: right;">Start Test</button>
+                            <button class="test-button" type="button" style="float: right; font-family:Manrope;">Start Test</button>
                         </a>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                         <h4 class="card-title text-center fw-bolder" id="card-title" style="font-family:Mulish;">Anxiety Assessment</h4>
                         <p class="card-text body text-justify" style="font-family:Manrope; display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Find out if your anxiety could be a sign of something more serious.</p>
                         <a href="{% url 'assessment:anxiety_assessment' %}">
-                            <button class="test-button" type="button" style="float: right;">Start Test</button>
+                            <button class="test-button" type="button" style="float: right; font-family:Manrope;">Start Test</button>
                         </a>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                         <h4 class="card-title text-center fw-bolder" id="card-title" style="font-family:Mulish;">Stress Assessment</h4>
                         <p class="card-text body text-justify" style="font-family:Manrope; display: -webkit-box; max-width: 100%; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Find out if your feelings are a sign of something more serious.</p>
                         <a href="{% url 'assessment:stress_assessment' %}">
-                            <button class="test-button" type="button" style="float: right;">Start Test</button>
+                            <button class="test-button" type="button" style="float: right; font-family:Manrope;">Start Test</button>
                         </a>
                     </div>
                 </div>
@@ -68,12 +69,12 @@
             <h4 class="title" style="font-family:Mulish;">You are not logged in</h4>
             <p style="font-family:Manrope;">Please log in or sign up to continue</p>
             <div class="d-flex flex-row justify-content-center gap-3">
-                <a href="{% url 'authentications:login' %}" role="button" class="btn-login" aria-pressed="true" style="color: white;"><span>Log In</span></a>
-                <a href="{% url 'authentications:register' %}" role="button" class="btn-signup" aria-pressed="true"><span>Sign Up</span></a>
-              </div>
+                <a href="{% url 'authentications:login' %}" role="button" class="btn-login" aria-pressed="true" style="color: white;  font-family:Manrope;"><span>Log In</span></a>
+                <a href="{% url 'authentications:register' %}" role="button" class="btn-signup" aria-pressed="true" style="font-family:Manrope;"><span>Sign Up</span></a>
+            </div>
         <!-- end of user not logged in -->
         {% endif %}
     </div>
 </div>
-<br>
+<br><br>
 {% endblock content %}
