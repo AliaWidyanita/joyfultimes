@@ -59,14 +59,15 @@ crossorigin="anonymous">
         
             <div class="card shadow border-0 bg-light d-flex justify-content-center" style="margin:10px 40px 10px 20px">
               <div class="card-header" style="font-weight:bold">
-                <p>${i.fields.title}</p>
+                <p>${i.fields.title}${i.pk}</p>
+                <button type="button" class="btn btn-link" id="delete-icon"" style="float:left;"><a href="delete/${i.pk}/" role="button">Delete</a></button>
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
                    <p>${i.fields.notes}</p>
                    <footer class="blockquote-footer"> ${i.fields.sender}</footer>
                 </blockquote>
-               </div>
+              </div>
             </div>    
          
         `;
@@ -91,6 +92,8 @@ crossorigin="anonymous">
         },
     });
   });
+
+
 
 </script>
 

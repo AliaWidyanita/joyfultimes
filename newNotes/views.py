@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect, get_object_or_404
 
 # Create your views here.
 from newNotes.models import Notes
@@ -71,7 +71,13 @@ def get_notes_all(request):
         }
     return render(request, 'newnotes_userpage.html', context)
 
-
+@login_required(login_url='/authentications/login')
 def notes_json_all(request):
     data = Notes.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json',data),content_type="application/json")
+
+@login_required(login_url='/authentications/login')
+def delete(request, id):
+    item = Notes.objects.get(user = request.user, id=id)
+    item.delete()
+    return redirect('newNotes:get_notes_all')
