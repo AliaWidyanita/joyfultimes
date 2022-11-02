@@ -23,14 +23,15 @@ crossorigin="anonymous">
 
 <body class="d-flex flex-column" style="margin-top: 160px; min-height: fit-content;">
     <div class="container text-center" style="margin-bottom: 10px;">
-        <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560;">Happy Notes</h1>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80">Add New Note</button>
-        <br>
+        <h1 class="title" style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560; font-weight: bolder;">Happy Notes</h1>
+        <p class="sub">"There is hope, even when your brain tells you there isn't."</p> 
+        <p class="sub">~ John Green</p>
         <div id="notesCard" class="row"></div>
         <br>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80">Add New Note</button>
         {% if user.is_authenticated %}
         <p>Hey, {{user.username}}, do you want to check all the notes you have sent?</p>
-        <a class="btn btn-primary" href="{% url 'newNotes:get_notes_all' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Show My Notes</a>
+        <a class="btn btn-secondary" href="{% url 'newNotes:get_notes_all' %}" style="margin:10px 20px; background-color: #2F6D80;" role="button">Show My Notes</a>
         {% endif %}
     </div>
 </body>
