@@ -10,7 +10,7 @@
             <form method="POST" action="">
                 {% csrf_token %}  
                 <div class="mb-3">
-                    <label for="username" class="form-label">Email address</label>
+                    <label for="username" class="form-label">Username</label>
                     <input type="text" name="username" class="form-control border" id="username">
                 </div>
                 <div class="mb-3">
@@ -29,7 +29,7 @@
             {% endfor %}
             </ul>
             {% endif %} 
-                <p class="mb-0  text-center">Don't have an account? <a href="{% url 'authentications:register' %}"class="text-primary fw-bold">SignUp</a></p>
+                <p class="mb-0  text-center">Don't have an account? <a href="{% url 'authentications:register' %}"class="text-primary fw-bold">Sign Up</a></p>
             </div>
         </div>
     </div>
