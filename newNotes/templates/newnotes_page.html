@@ -21,14 +21,15 @@ crossorigin="anonymous">
 
 
 
-<body class="d-flex flex-column" style="margin-top: 160px;">
-    <div class="container text-center" style="margin-bottom: 30px;">
+<body class="d-flex flex-column" style="margin-top: 160px; min-height: fit-content;">
+    <div class="container text-center" style="margin-bottom: 10px;">
         <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560;">Happy Notes</h1>
         {% if user.is_authenticated %}
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80">Add New Note</button>
         <br>
         <a class="btn btn-primary" href="{% url 'newNotes:get_notes_all' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Show All</a>
         {% endif %}
+        <p>Tes Quotes</p>
     </div>
     <div id="notesCard" class="row">
     </div>

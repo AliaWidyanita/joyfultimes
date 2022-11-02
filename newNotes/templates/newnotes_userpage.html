@@ -22,10 +22,10 @@ crossorigin="anonymous">
 
 
 
-<body class="d-flex flex-column" style="margin-top: 160px;">
+<body class="d-flex flex-column" style="margin-top: 160px; min-height: fit-content;">
     <div class="container text-center" style=" margin-bottom: 30px;">
         <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560;">Happy Notes</h1>
-        <p>Hi , {{user.username}}</p>
+        <p>Hi , {{user.username}}.<br>These are the notes you sent...<br> Thank you for your kindness</p>
         <a class="btn btn-primary" href="{% url 'newNotes:get_notes' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Go back</a>
         <br>
     </div>
@@ -55,8 +55,7 @@ crossorigin="anonymous">
         
             <div class="card shadow border-0 bg-light d-flex flex-column justify-content-center" style="margin:10px 40px 10px 20px">
               <div class="card-header" style="font-weight:bold">
-                <p>${i.fields.title}</p>
-                <button type="button" class="btn btn-link" id="delete-icon"" style="float:left;"><a href="delete/${i.pk}/" role="button">Delete</a></button>
+                <p>${i.fields.title}</p><a class="btn btn-primary" style="float:left; background-color: #2F6D80" href="delete/${i.pk}/" role="button">Delete</a>
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
