@@ -29,52 +29,52 @@
   <meta property="og:type" content="website">
 </head>
 <body>
-<header>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-scroll" style="background-color: #2B4560;">
-    <div class="container-fluid" style="margin-left: 20px;">
-      <a class="navbar-brand" href="{% url 'home:show_home' %}">&#128515; JoyFulTimes</a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'forum:Forum' %}">Forum</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'notes:get_notes' %}">Notes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'cal:calendar' %}">Mood Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'assessment:assessment' %}">Assesment</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'diary:show_diary' %}">Diary</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-flex flex-row">
-        
-          <li class="nav-item me-3 me-lg-0">
-            {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'authentications:logout' %}">
-              <i class="fa-solid fa-right-from-bracket"></i>
-            </a>
-            {% else %}
-            <a class="btn btn-primary nav-link" href="{% url 'authentications:login' %}" role="button" style="background-color: white; color: #2B4560; margin-right:20px; border:none; padding: 10px 40px 10px 40px;">Login</a>
-            {% endif %}
-          </li>
-        </ul>
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-scroll" style="background-color: #2B4560;">
+      <div class="container-fluid" style="margin-left: 20px;">
+        <a class="navbar-brand" href="{% url 'home:show_home' %}">&#128515; JoyFulTimes</a>
+  
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'forum:Forum' %}">Forum</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'newNotes:get_notes' %}">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cal:calendar' %}">Mood Tracker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'assessment:assessment' %}">Assesment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'diary:show_diary' %}">Diary</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav d-flex flex-row">
+          
+            <li class="nav-item me-3 me-lg-0">
+              {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'authentications:logout' %}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </a>
+              {% else %}
+              <a class="btn btn-primary nav-link" href="{% url 'authentications:login' %}" role="button" style="background-color: white; color: #2B4560; margin-right:20px; border:none; padding: 10px 40px 10px 40px;">Login</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <!-- Navbar -->
-</header>
+    </nav>
+    <!-- Navbar -->
+  </header>
 
 {% block content %} 
 {% endblock content %}
@@ -175,6 +175,14 @@ height: 10%;
 margin: auto;
 }
 
+.cardEdit {
+  background-color: #ebe7e79f;
+  width: 56%;
+  height: 25%;
+  margin: auto;
+  border-radius: 8px;
+  margin-top: 13%;
+}
 
 .navbar-brand {
   letter-spacing: 3px;
@@ -271,12 +279,88 @@ margin: auto;
   font-size: 100%;
 }
 
+.buttonMT {
+  background-color:#e0e190; 
+  margin-left: 0.3%; 
+  margin-top: 3%;
+}
+
+.buttonMT:hover {
+  color: #fff;
+  cursor: pointer;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  text-align: center;
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #f5ce62, #e4e403, #fa7199, #e8d319);
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+
+.buttonSave {
+  background-color:#6AA4B0; 
+  margin: 3%
+}
+
+.buttonSave:hover{
+  color: #fff;
+  cursor: pointer;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  text-align: center;
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #155a78, #40e495, #30dd8a, #2bb673);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+.btnleft1:hover {
+  color: #fff;
+  cursor: pointer;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  text-align: center;
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #155a78, #40e495, #30dd8a, #2bb673);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
 .btnleft:hover {
-  background-color: #2F6D80;
+  color: #fff;
+  cursor: pointer;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  text-align: center;
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #155a78, #40e495, #30dd8a, #2bb673);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
 }
 
 .btn1right:hover {
-  background-color: #2F6D80;
+  color: #fff;
+  cursor: pointer;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  text-align: center;
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  background-image: linear-gradient(to right, #f5ce62, #e4e403, #fa7199, #e8d319);
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 }
 
 .btn2right:hover {
@@ -339,6 +423,10 @@ h1 {
   width: 200px;
   height: 100px;
   padding: 40px 0px 0px 5px;
+}
+
+td:hover {
+  background-color: #89cbd8cd;
 }
 
 .month {
