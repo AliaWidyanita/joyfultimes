@@ -23,7 +23,7 @@ crossorigin="anonymous">
 </style>
 
 
-<html lang="en" style="font-size: 16px;">
+<html lang="en">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -34,12 +34,11 @@ crossorigin="anonymous">
 
 <body class="d-flex flex-column" style="margin-top: 160px; min-height: fit-content;">
     <div class="container text-center" style=" margin-bottom: 30px;">
-        <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560;">Happy Notes</h1>
+        <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560; font-weight: bolder; font-size: 48px;">Happy Notes</h1>
         <p style="font-family: Manrope;">Hi , {{user.username}}.<br>These are the notes you sent...<br> Thank you for your kindness</p>
+        <hr>
         <div id="notesCard" class="row"></div>
         <a class="btn btn-secondary" href="{% url 'newNotes:get_notes' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Go back</a>
-    </div>
-    <div id="notesCard" class="row">
     </div>
 </body>
 
@@ -59,7 +58,10 @@ crossorigin="anonymous">
     success: function (response) {
 
        //alert("Successfully Inserted");
-       //alert(JSON.stringify(response));      
+       //alert(JSON.stringify(response)); 
+       if (response.length == 0){
+        $("#notesCard").html("<div><p>{{user.username}}, Kamu belum mengirim note</p></div>")
+       }     
        for(let i of response){
         isi += `
           <div class="col-sm-6">

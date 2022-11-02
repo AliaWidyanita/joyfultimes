@@ -66,8 +66,10 @@ def delete_data(request):
 @login_required(login_url='/authentications/login')
 def get_notes_all(request):
     data_notes = Notes.objects.filter(user=request.user)
+    notes_size = data_notes.count()
     context = {
             'list_notes' : data_notes,
+            'list_count' : notes_size,
         }
     return render(request, 'newnotes_userpage.html', context)
 
