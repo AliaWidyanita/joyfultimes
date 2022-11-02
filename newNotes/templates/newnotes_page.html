@@ -33,16 +33,23 @@ crossorigin="anonymous">
 <body class="d-flex flex-column" style="margin-top: 160px; min-height: fit-content;">
     <div class="container text-center" style="margin-bottom: 10px;">
         <h1 class="title" style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560; font-weight: bolder; font-size: 48px;">Happy Notes</h1>
+        <hr>
         <p class="sub">"There is hope, even when your brain tells you there isn't."</p> 
-        <p class="sub"> ~ John Green</p>
+        <p class="sub"> ~ John Green</p>       
         <div id="notesCard" class="row"></div>
-        <br>
         <p class="sub">"You have to hands. One to help yourself, and one to help others." ~ Audrey Hepburn</p> 
         <p class="sub">Send your kindness with words...</p>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80">Send a Note</button>
         {% if user.is_authenticated %}
-        <p>Hey, {{user.username}}, do you want to check all the notes you have sent?</p>
-        <a class="btn btn-secondary" href="{% url 'newNotes:get_notes_all' %}" style="margin:10px 20px; background-color: #2F6D80;" role="button">Show My Notes</a>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80;">Send a Note</button>
+            <a class="btn btn-secondary" href="{% url 'newNotes:get_notes_all' %}" style="margin:10px 20px; background-color: #2F6D80;" role="button">Show My Notes</a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCreate" style="margin:20px 20px; background-color:#2F6D80;">Send a Note</button>
         {% endif %}
     </div>
 </body>
@@ -96,7 +103,7 @@ crossorigin="anonymous">
        for(let i of response){
         isi += `
         
-            <div class="card shadow border-0 bg-light" style="margin:10px 40px 10px 20px">
+            <div class="card shadow border-0 bg-light" style="margin:10px 0px 10px 0px;">
               <div class="card-header" style="font-weight:bold; float:left; font-size: larger;">
                 <p>${i.fields.title}</p>
               </div>
