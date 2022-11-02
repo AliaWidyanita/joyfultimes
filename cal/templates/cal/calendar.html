@@ -12,7 +12,7 @@ Calendar
 <div class="clearfix">
 	<a class="btnleft" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btnleft1" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
-	<!-- <a class="btn1right"  data-bs-toggle="modal" data-bs-target="#exampleModal"> New Record </a> -->
+	<a class="btn1right"  data-bs-toggle="modal" data-bs-target="#exampleModal"> New Record </a>
 </div>
 <table class="calendar">
 {{calendar}}
@@ -42,19 +42,19 @@ Calendar
           </div>
           <div class="mb-3">
             <label for="id-rate" class="col-form-label">Mood Rate:</label>
-            <input id="id_rate" min="1" max="10" step="1" name="mood" type="range">
+            <input id="id_rate" min="1" max="10" step="1" name="mood" type="range" class="form-range" >
           </div>
 		  <div class="mb-3">
             <label for="id_description" class="col-form-label">Description:</label>
-            <textarea name="description" cols="40" rows="5" required="" id="id_description"></textarea>
+            <textarea name="description" cols="40" rows="5" required="" id="id_description" class="form-control"></textarea>
           </div>
 		  <div class="mb-3">
             <label for="id_start_time" class="col-form-label">Start Time:</label>
-            <input type="datetime-local" name="start_time" required="" id="id_start_time">
+            <input type="datetime-local" name="start_time" required="" id="id_start_time" class="form-control">
           </div>
 		  <div class="mb-3">
             <label for="id_end_time" class="col-form-label">End Time:</label>
-            <input type="datetime-local" name="end_time" required="" id="id_end_time">
+            <input type="datetime-local" name="end_time" required="" id="id_end_time" class="form-control">
           </div>
       </div>
       <div class="modal-footer">
@@ -67,22 +67,6 @@ Calendar
 </div>
 
 <script>
-	var exampleModal = document.getElementById('exampleModal')
-  exampleModal.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
-  var modalTitle = exampleModal.querySelector('.modal-title')
-  var modalBodyInput = exampleModal.querySelector('.modal-body input')
-
-  modalTitle.textContent = 'New message to ' + recipient
-  modalBodyInput.value = recipient
-})
 	$(document).ready(function () {
       $("#event_post").submit(function (e) {
         console.log("tes1");
@@ -102,10 +86,11 @@ Calendar
                 csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
             }, async:true,
             success: function (response) {
-				        $(".modal-dialog").append("<div class='modal fade' id='exampleModalToggle2' aria-hidden='true' aria-labelledby='exampleModalToggleLabel2' tabindex='-1'><div class='modal-dialog modal-dialog-centered'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='exampleModalToggleLabel2'>Response</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'>You feel {{title}}.</div></div></div></div>")	
                 e.preventDefault();
                 console.log("tes2");
-                window.location.replace("{% url 'cal:calendar' %}")},
+                $('#exampleModal').modal('hide');
+                window.location.replace("{% url 'cal:calendar' %}")
+                alert("You feel " + response.mood.title);},
         })
       })
 	  
