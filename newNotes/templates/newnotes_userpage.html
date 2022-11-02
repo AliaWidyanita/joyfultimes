@@ -26,9 +26,8 @@ crossorigin="anonymous">
     <div class="container text-center" style=" margin-bottom: 30px;">
         <h1 style = "color:#01010e; text-align: center; font-family:Mulish; color: #2B4560;">Happy Notes</h1>
         <p>Hi , {{user.username}}.<br>These are the notes you sent...<br> Thank you for your kindness</p>
-        <br>
         <div id="notesCard" class="row"></div>
-        <a class="btn btn-primary" href="{% url 'newNotes:get_notes' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Go back</a>
+        <a class="btn btn-secondary" href="{% url 'newNotes:get_notes' %}" style="margin:20px 20px; background-color: #2F6D80;" role="button">Go back</a>
     </div>
     <div id="notesCard" class="row">
     </div>
@@ -54,7 +53,7 @@ crossorigin="anonymous">
        for(let i of response){
         isi += `
         
-            <div class="card shadow border-0 bg-light d-inline-flex flex-column justify-content-center" style="margin:10px 40px 10px 10px;">
+            <div class="card shadow border-0 bg-light d-inline-flex flex-column justify-content-center" style="margin:10px 40px 10px 10px; width: 37rem;">
               <div class="card-header" style="font-weight:bold">
                 <p>${i.fields.title}</p><a class="btn btn-primary" style="float:center; background-color: #2F6D80" href="delete/${i.pk}/" role="button">Delete</a>
               </div>
