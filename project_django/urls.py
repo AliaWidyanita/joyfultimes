@@ -27,4 +27,5 @@ urlpatterns = [
     path('assessment/', include('assessment.urls')),
     path('notes/', include('notes.urls')),
     path('newNotes/',include('newNotes.urls')),
+    path('auth/', include('authentication.urls'))
 ]
