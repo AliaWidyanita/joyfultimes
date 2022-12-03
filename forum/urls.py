@@ -12,5 +12,5 @@ urlpatterns = [
     path('api/addComment/<int:id>/', create_comment_ajax, name="addNewComment"),
     path('deleteForum/<int:id>/', delete_forum, name="deleteForum"),
     path('deleteComment/<int:id>/', delete_comment, name="deleteComment"),
-    path('flutter/forum/', flutter_forum, name="flutter_forum"),
+    path('flutterForum/', flutter_forum, name="flutter_forum"),
 ]
