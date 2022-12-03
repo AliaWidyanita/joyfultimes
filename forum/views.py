@@ -9,6 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import datetime
 
+@csrf_exempt
+def flutter_forum(request):
+    data = ForumPost.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    
 # Create your views here.
 @csrf_exempt
 def get_forum_list(request):
