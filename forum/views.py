@@ -11,8 +11,21 @@ import datetime
 
 @csrf_exempt
 def flutter_forum(request):
-    data = ForumPost.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    list_post = ForumPost.objects.all().order_by('-date_created')
+    ret = []
+    for posts in list_post:
+        temp = {
+            "pk": posts.pk,
+            "author": posts.author.username,
+            "topic": posts.topic,
+            "description":posts.description,
+            "date_created":posts.date_created.date(),
+            "role":posts.role
+        }
+        ret.append(temp)
+
+    data = json.dumps(ret, default=str)
+    return HttpResponse(data, content_type='application/json')
     
 # Create your views here.
 @csrf_exempt
