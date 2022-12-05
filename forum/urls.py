@@ -13,4 +13,5 @@ urlpatterns = [
     path('deleteForum/<int:id>/', delete_forum, name="deleteForum"),
     path('deleteComment/<int:id>/', delete_comment, name="deleteComment"),
     path('flutterForum/', flutter_forum, name="flutter_forum"),
+    path('flutterComment/<int:id>/', flutter_comment, name="flutter_comment")
 ]
