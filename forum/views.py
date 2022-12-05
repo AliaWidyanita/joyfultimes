@@ -26,6 +26,24 @@ def flutter_forum(request):
 
     data = json.dumps(ret, default=str)
     return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
+def flutter_comment(request, id):
+    forumPost = ForumPost.objects.get(pk=id)
+    comments = Comment.objects.all().filter(parentForum=forumPost).order_by('-date_created')
+    ret = []
+    for comment in comments:
+        temp = {
+            "pk": comment.pk,
+            "author": comment.author,
+            "parentForum": comment.parentForum,
+            "description": comment.description,
+            "role": comment.role,
+            "date_created": comment.date_created.date(),
+        }
+        ret.append(temp)
+    data = json.dumps(ret, default=str)
+    return HttpResponse(data, content_type='application/json')
     
 # Create your views here.
 @csrf_exempt
