@@ -9,7 +9,7 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    range = models.IntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    range = models.IntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     @property
     def get_html_url(self):

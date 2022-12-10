@@ -107,9 +107,9 @@ def event_edit_post(request, event_id):
             'mood':event_resp,
             'url': 'cal/calendar'}
     return JsonResponse(data)
-
+@login_required(login_url='/authentications/login')
 def showJsonMood(request):
-    mood = Event.objects.all()
+    mood = Event.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize('json', mood))
 @csrf_exempt
 def event_post_free(request):
@@ -124,7 +124,9 @@ def event_post_free(request):
         user = User.objects.filter(id=1)
         mood_new = Event(user=user[0],title=title, description=description, start_time=start_time, end_time=end_time, range=range)
         mood_new.save()
-        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range}
+        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range, 'status': 'success'}
+    else:
+        mood= {'status': 'failed'}
     return JsonResponse(mood)
 
 # def delete_all(request):
