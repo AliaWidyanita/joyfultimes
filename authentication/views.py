@@ -31,3 +31,9 @@ def flutter_register(request):
             return JsonResponse({'status': 'failed', 'message': 'Gagal woi'})
         User.objects.create_user(username=username, password=password1, email=email)
         return JsonResponse({'status': 'success'})
+
+def get_data(request):
+
+    return JsonResponse({
+        "username":request.user.username
+    })
