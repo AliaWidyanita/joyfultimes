@@ -8,9 +8,11 @@ from django.utils.safestring import mark_safe
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 import calendar
+from django.core import serializers
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 from .models import *
 from .utils import Calendar
@@ -82,6 +84,7 @@ def event_post(request):
             'mood':mood,
             'url': 'cal/calendar'}
     return JsonResponse(data)
+
 @login_required(login_url='/authentications/login')
 def event_edit(request, event_id):
     event = Event.objects.get(id=event_id)
@@ -104,6 +107,25 @@ def event_edit_post(request, event_id):
             'mood':event_resp,
             'url': 'cal/calendar'}
     return JsonResponse(data)
+
+def showJsonMood(request):
+    mood = Event.objects.all()
+    return HttpResponse(serializers.serialize('json', mood))
+@csrf_exempt
+def event_post_free(request):
+    if request.method == 'POST':
+        store = json.loads(request.body.decode('utf-8'))
+        print(store)
+        title = store['title']
+        description = store['description']
+        start_time = store['start_time']
+        end_time = store['end_time']
+        range = store['range']
+        user = User.objects.filter(id=1)
+        mood_new = Event(user=user[0],title=title, description=description, start_time=start_time, end_time=end_time, range=range)
+        mood_new.save()
+        mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range}
+    return JsonResponse(mood)
 
 # def delete_all(request):
 #     Event.objects.all().delete()
