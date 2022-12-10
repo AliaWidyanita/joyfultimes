@@ -164,3 +164,37 @@ def delete_comment(request, id):
         comment = get_object_or_404(Comment, id=id)
         comment.delete()
     return HttpResponse(status=202)
+
+@login_required(login_url='/authentications/login')
+@csrf_exempt
+def flutter_add_forum(request):
+    if request.method == 'POST':
+        topic = request.POST['description']
+        role = request.POST['role']
+        description = request.POST['description']
+        ForumPost.objects.create(
+            topic=topic,
+            description=description,
+            date_created=datetime.date.today(),
+            author=request.user,
+            role=role
+        )
+        return JsonResponse({'status': 'success'})
+
+@login_required(login_url='/authentications/login')
+@csrf_exempt
+def flutter_add_forum(request, id):
+    if request.method == 'POST':
+        forumPost = ForumPost.objects.get(pk=id)
+        role = request.POST['role']
+        description = request.POST['description']
+
+        ForumPost.objects.create(
+            parentForum=forumPost,
+            description=description,
+            date_created=datetime.date.today(),
+            author=request.user,
+            role=role
+        )
+        return JsonResponse({'status': 'success'})
+
