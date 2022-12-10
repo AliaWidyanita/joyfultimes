@@ -56,6 +56,36 @@ def depression_assessment_json(request):
             return JsonResponse({'error': form.errors})
     return redirect('assessment:depression_assessment')
 
+@csrf_exempt
+def add_depression_result_flutter(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            result = data["result"]
+            
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
+            if hasil_assessment:
+                hasil_assessment.result = result
+                hasil_assessment.save()
+            else:
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=1, result=result)
+                hasil_assessment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def fetch_depression_result_flutter(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=1).first()
+            if hasil_assessment:
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
 # Function for anxiety assessment
 def anxiety_assessment(request):
     form = AnxietyTest()
@@ -101,6 +131,36 @@ def anxiety_assessment_json(request):
             return JsonResponse({'error': form.errors})
     return redirect('assessment:anxiety_assessment')
 
+@csrf_exempt
+def add_anxiety_result_flutter(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            result = data["result"]
+            
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
+            if hasil_assessment:
+                hasil_assessment.result = result
+                hasil_assessment.save()
+            else:
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=2, result=result)
+                hasil_assessment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def fetch_anxiety_result_flutter(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=2).first()
+            if hasil_assessment:
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
 # Function for stress assessment
 def stress_assessment(request):
     form = StressTest()
@@ -145,3 +205,33 @@ def stress_assessment_json(request):
         else:
             return JsonResponse({'error': form.errors})
     return redirect('assessment:stress_assessment')
+
+@csrf_exempt
+def add_stress_result_flutter(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            result = data["result"]
+            
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
+            if hasil_assessment:
+                hasil_assessment.result = result
+                hasil_assessment.save()
+            else:
+                hasil_assessment = MentalHealthAssessment(user=request.user, topic=3, result=result)
+                hasil_assessment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def fetch_stress_result_flutter(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            hasil_assessment = MentalHealthAssessment.objects.filter(user=request.user, topic=3).first()
+            if hasil_assessment:
+                return JsonResponse({"result": hasil_assessment.result, "date": hasil_assessment.date}, status=200)
+        return JsonResponse({"result": "", "date": ""}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
