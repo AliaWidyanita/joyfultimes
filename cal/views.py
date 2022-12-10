@@ -112,6 +112,7 @@ def showJsonMood(request):
     mood = Event.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize('json', mood))
 @csrf_exempt
+@login_required(login_url='/authentications/login')
 def event_post_free(request):
     if request.method == 'POST':
         store = json.loads(request.body.decode('utf-8'))
@@ -121,8 +122,8 @@ def event_post_free(request):
         start_time = store['start_time']
         end_time = store['end_time']
         range = store['range']
-        user = User.objects.filter(id=1)
-        mood_new = Event(user=user[0],title=title, description=description, start_time=start_time, end_time=end_time, range=range)
+        user = request.user
+        mood_new = Event(user=user,title=title, description=description, start_time=start_time, end_time=end_time, range=range)
         mood_new.save()
         mood= {'title': mood_new.title, 'description':mood_new.description, 'start_time':mood_new.start_time,'end_time':mood_new.end_time, 'range':mood_new.range, 'status': 'success'}
     else:
