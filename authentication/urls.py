@@ -6,4 +6,4 @@ app_name = 'authentication'
 urlpatterns = [
     path('loginFlutter/', flutter_login, name='login-flutter'),
     path('registerFlutter/', flutter_register, name='register-flutter')
-]
+]  
