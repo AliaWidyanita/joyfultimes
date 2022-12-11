@@ -183,18 +183,21 @@ def flutter_add_forum(request):
 
 @login_required(login_url='/authentications/login')
 @csrf_exempt
-def flutter_add_forum(request, id):
+def flutter_add_comment(request, id):
     if request.method == 'POST':
-        forumPost = ForumPost.objects.get(pk=id)
-        role = request.POST['role']
-        description = request.POST['description']
+        try:
+            forumPost = ForumPost.objects.get(pk=id)
+            role = request.POST['role']
+            description = request.POST['description']
 
-        ForumPost.objects.create(
-            parentForum=forumPost,
-            description=description,
-            date_created=datetime.date.today(),
-            author=request.user,
-            role=role
-        )
-        return JsonResponse({'status': 'success'})
+            ForumPost.objects.create(
+                parentForum=forumPost,
+                description=description,
+                date_created=datetime.date.today(),
+                author=request.user,
+                role=role
+            )
+            return JsonResponse({'status': 'success'})
+        except:
+            return JsonResponse({'status':'failed'})
 
