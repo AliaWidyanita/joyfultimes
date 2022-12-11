@@ -26,11 +26,15 @@ def flutter_register(request):
         username = request.POST['username']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        email = request.POST['email']
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({"status": "duplicate"}, status=401)
+
         if password1 != password2:
-            return JsonResponse({'status': 'failed', 'message': 'Gagal woi'})
-        User.objects.create_user(username=username, password=password1, email=email)
+            return JsonResponse({"status": "pass failed"}, status=401)
+        User.objects.create_user(username=username, password=password1)
         return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 def get_data(request):
 
