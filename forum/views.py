@@ -190,7 +190,7 @@ def flutter_add_comment(request, id):
             role = request.POST['role']
             description = request.POST['description']
 
-            ForumPost.objects.create(
+            Comment.objects.create(
                 parentForum=forumPost,
                 description=description,
                 date_created=datetime.date.today(),
