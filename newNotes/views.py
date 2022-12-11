@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 import random
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -58,6 +59,19 @@ def create_notes(request):
     }
     return render(request, 'newnotes_page.html', context)
 
+@csrf_exempt
+def add_notes_obj(request):
+    if request.method == 'POST':
+        user = request.user
+        sender = request.POST.get('sender')
+        title = request.POST.get('title')
+        notes = request.POST.get('notes')
+
+        Notes.objects.create(user=user, sender=sender, title=title,notes=notes)
+
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'failed'})
+
 @login_required(login_url='/authentications/login')
 def delete_data(request):
     Notes.objects.all().delete()
@@ -72,6 +86,11 @@ def get_notes_all(request):
             'list_count' : notes_size,
         }
     return render(request, 'newnotes_userpage.html', context)
+
+@login_required(login_url='/authentications/login')
+def fetch_flutter(request):
+    notes = Notes.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize('json', notes))
 
 @login_required(login_url='/authentications/login')
 def notes_json_all(request):
