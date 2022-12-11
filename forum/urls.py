@@ -15,5 +15,5 @@ urlpatterns = [
     path('flutterForum/', flutter_forum, name="flutter_forum"),
     path('flutterComment/<int:id>/', flutter_comment, name="flutter_comment"),
     path('flutter/addComment/<int:id>', flutter_add_comment, name="flutterAddComment"),
-    path('flutter/addForum', flutter_add_forum, name="flutterAddForum")
+    path('flutter/addForum/', flutter_add_forum, name="flutterAddForum")
 ]
