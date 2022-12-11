@@ -58,13 +58,12 @@ def add_diary(request):
 
 def add_diary_obj(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
         user = request.user
         title = request.POST.get('title')
         body = request.POST.get('body')
 
         Diary.objects.create(user=user, title=title, body=body)
-        return JsonResponse({'status': 'success', 'message': 'Diary created successfully'})
+        return JsonResponse({'status': 'success'})
 
 def update(request, id):
     item = Diary.objects.filter(user = request.user, id = id)
