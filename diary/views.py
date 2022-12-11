@@ -56,6 +56,7 @@ def add_diary(request):
 
         return HttpResponseBadRequest("Hmm.. What's wrong?")
 
+@csrf_exempt
 def add_diary_obj(request):
     if request.method == 'POST':
         user = request.user
@@ -64,6 +65,8 @@ def add_diary_obj(request):
 
         Diary.objects.create(user=user, title=title, body=body)
         return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'failed'})
 
 def update(request, id):
     item = Diary.objects.filter(user = request.user, id = id)
