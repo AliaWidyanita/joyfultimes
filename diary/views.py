@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from diary.forms import AddDiaryForm
 from diary.models import Diary
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -55,6 +55,16 @@ def add_diary(request):
             return HttpResponse(diary)
 
         return HttpResponseBadRequest("Hmm.. What's wrong?")
+
+def add_diary_obj(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        user = request.user
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+
+        Diary.objects.create(user=user, title=title, body=body)
+        return JsonResponse({'status': 'success', 'message': 'Diary created successfully'})
 
 def update(request, id):
     item = Diary.objects.filter(user = request.user, id = id)
