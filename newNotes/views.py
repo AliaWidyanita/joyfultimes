@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
 import random
+import json
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -62,14 +63,24 @@ def create_notes(request):
 @csrf_exempt
 def add_notes_obj(request):
     if request.method == 'POST':
-        user = request.user
-        sender = request.POST.get('sender')
-        title = request.POST.get('title')
-        notes = request.POST.get('notes')
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            sender = data['sender']
+            title = data['title']
+            notes = data['notes']
 
-        Notes.objects.create(user=user, sender=sender, title=title,notes=notes)
+            newNote = Notes.objects.create(user = request.user , sender=sender, title=title, notes=notes)
+            newNote.save()
 
-        return JsonResponse({'status': 'success'})
+            return JsonResponse({'status': 'success'})
+        # user = request.user
+        # sender = request.POST.get('sender')
+        # title = request.POST.get('title')
+        # notes = request.POST.get('notes')
+
+        # Notes.objects.create(user=user, sender=sender, title=title,notes=notes)
+
+        # return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'failed'})
 
 @login_required(login_url='/authentications/login')
