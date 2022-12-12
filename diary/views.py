@@ -85,6 +85,18 @@ def updaterecord(request, id):
         return redirect('diary:show_detail', id=item.id)
     return HttpResponseBadRequest("Hmm.. What's wrong?")
 
+def flutter_updaterecord(request, id):
+    if request.method == 'POST':
+        title = request.POST['title']
+        body = request.POST['body']
+        item = Diary.objects.get(user = request.user, id=id)
+        item.title = title
+        item.body = body
+        item.date = datetime.now()
+        item.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'failed'})
+
 def delete(request, id):
     item = Diary.objects.get(user = request.user, id = id)
     item.delete()

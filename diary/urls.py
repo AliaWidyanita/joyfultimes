@@ -1,5 +1,5 @@
 from django.urls import path
-from diary.views import show_diary, json_diary, add_diary, page_add, show_detail, update, updaterecord, delete, add_diary_obj
+from diary.views import show_diary, json_diary, add_diary, page_add, show_detail, update, updaterecord, delete, add_diary_obj, flutter_updaterecord
 
 app_name = 'diary'
 
@@ -13,5 +13,6 @@ urlpatterns = [
     path('edit/<int:id>', update, name='edit'),
     path('edit/updaterecord/<int:id>', updaterecord, name='updaterecord'),
     path('delete/<int:id>', delete, name='delete'),
+    path('edit/update/<int:id>', flutter_updaterecord, name='flutter_updaterecord'),
 
 ]
