@@ -85,6 +85,7 @@ def updaterecord(request, id):
         return redirect('diary:show_detail', id=item.id)
     return HttpResponseBadRequest("Hmm.. What's wrong?")
 
+@csrf_exempt
 def flutter_updaterecord(request, id):
     if request.method == 'POST':
         title = request.POST['title']
